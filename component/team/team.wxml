@@ -1,0 +1,45 @@
+<!-- team.wxml -->
+<view class='content_info' id='{{item._id}}' bindtap="getDetail">
+    <view class='info_box'>
+        <image src='{{item.owner.avatarUrl}}' style='height:36px;width:36px;border-radius:50%'></image>
+        <view class='user_info'>
+            <text style='font-weight:bold;'>{{item.owner.nickName}}</text>
+            <text>{{item.owner.intro}}</text>
+        </view>
+    </view>
+        <image src='{{item.postUrl}}' mode='center' style='height:159px;width:100%;margin-top:10rpx;'></image>
+        <view class='location_info'>
+            <image src='../../images/like.png' style='height:18px;width:14px'></image>
+            <text style='font-size:11px;color:#848484;margin-left:4px;'>
+                {{item.locationName}} {{item.distance}}m
+            </text>
+        </view>
+        <view class='date_info'>{{item.createTime}}</view>
+</view>
+<view class='icon_box1'>
+    <view class='item-number'>
+        <image src='../../images/like.png' style='height:17px;width:17px'></image>
+        <view class='textnumber'>
+            <text></text>
+        </view>
+    </view>
+    <view class='item-number'>
+        <image src='../../images/like.png' style='height:18px;width:23px' id='{{item._id}}' bindtap="getDetail"></image>
+        <view class='textnumber'>
+            <text>{{item.commentCount==0?'':item.commentCount}}</text>
+        </view>
+    </view>
+    <view class='item-number'>
+        <image src="{{item.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' id='{{item._id}}' bindtap='like2team'></image>
+        <view class='textnumber'>
+            <text>{{item.goodCount==0?'':item.goodCount}}</text>
+        </view>
+    </view>
+    <view class='item-number'>
+        <image src="{{item.collectBool?'../../images/favorite2.png':'../../images/favorite.png'}}" style='height:19px;width:19px'
+         id='{{item._id}}' bindtap='collect2team'></image>
+        <view class='textnumber'>
+            <text>{{item.collectCount==0?'':item.collectCount}}</text>
+        </view>
+    </view>
+</view>

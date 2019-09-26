@@ -1,0 +1,10 @@
+<!-- pages/search/search.wxml -->
+<view>
+    <!-- <view class='titleBar' style='height:{{titlebar_height}}px;'>
+        <image src='../../images/return.png' bindtap="return" style='margin-top: {{item_icon_position}}px;margin-left: 20rpx;height: 40rpx;width: 40rpx;'></image>
+        <text style="margin-left:50rpx">搜索结果</text>
+    </view> -->
+    <!-- <view style='height:{{titlebar_height}}px;'></view> -->
+    <team class='content_box' wx:for="{{teams}}" wx:key="index" team="{{item}}"></team>
+    <topic class='content_box' wx:for="{{topics}}" wx:key="{{item._id}}" topic="{{item}}"></topic>
+</view>

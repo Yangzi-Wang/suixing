@@ -1,0 +1,27 @@
+<!-- pages/fens/fens.wxml -->
+<view>
+  <!-- <view class='titleBar' style='height:{{titlebar_height}}px;background-color:white'>
+    <image src='../../images/return.png' bindtap='return' style='margin-top: {{item_icon_position}}px;margin-left: 20rpx;height: 40rpx;width: 40rpx;'></image>
+  </view> -->
+  <!-- <view style="height:{{titlebar_height}}px;"></view> -->
+  <view wx:for="{{list}}" wx:key="index" class="item">
+        <view class='user_info'>
+          <image src='{{item.avatarUrl}}' style='height:85rpx;width:85rpx;border-radius:50%'></image>
+          <view class='user_name'>
+            <view style='font-size:12px;font-weight:bold;'>
+              {{item.nickName}}
+            </view>
+            <view style='font-size:9px;color:#6B6B6B'>
+              {{item.intro}}
+            </view>
+          </view>
+        </view>
+        <!-- <view class='newtopic'>
+          <text style='font-size:8px;margin-left:15px;padding-right:17px;padding-top:10px;color:#AB4CFA'>
+            他有一个新话题
+          </text>
+          <text style='font-size:8px;margin-left:54px;padding-top:14px;color:#6B6B6B'>25天</text>
+        </view> -->
+    <!-- </view> -->
+  </view>
+</view>

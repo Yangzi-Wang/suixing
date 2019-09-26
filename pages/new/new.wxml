@@ -1,0 +1,140 @@
+<view class="page">
+  <view class='titleBar' style='height:{{titlebar_height}}px;background-color:white'>
+    <image src='../../images/like.png' style='margin-top: {{item_icon_position}}px;margin-left: 15px;height: 18px;width: 79px;'></image>
+  </view>
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar" style='margin-top:{{navbar_position}}px;border-bottom: solid 1px #EFEFEF'>
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" data-current="{{index}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}">
+        <swiper-item>
+          <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+            <view style='height:{{content_position}}px;background-color:white;'></view>
+            <!-- <view class='tips'>
+                    <image style='width:600rpx;' mode='widthFix' src='../../images/like.png'></image>
+                  </view> -->
+            <!-- 创建组队 -->
+            <view class='content'>
+              <view class='content_box'>
+                <view class='content_item'>
+                  <text>活动标题</text>
+                  <textarea class='textarea_style' bindconfirm='getTeamTitle' bindblur='getTeamTitle'></textarea>
+                </view>
+                <view class='content_item'>
+                  <text>标签</text>
+                  <view class="labels">
+                    <view class='tag' wx:for="{{labels}}" wx:key="{{item._id}}">{{item.name}}</view>
+                    
+                      <picker bindchange="bindLabelChange" value="{{index}}" range="{{labelsArr}}" range-key='name'>
+                        <view class='tag_add'>+</view>
+                      </picker>
+                  </view>
+                </view>
+                <view class='content_item'>
+                  <text>活动内容</text>
+                  <textarea class='textarea_style' style='height:100px' bindconfirm='getTeamContent' bindblur='getTeamContent'></textarea>
+                </view>
+                <view class='content_item' style='margin-left:27px;'>
+                  <text>时间</text>
+                  <view class='dateAndTime'>
+                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                      <view class="picker_style">{{date}}</view>
+                    </picker>
+                    <text style='background-color:white;margin-left:30px;'>-</text>
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                      <view class="picker_style">{{time}}</view>
+                    </picker>
+                  </view>
+                </view>
+                <view class='content_item'>
+                  <text>人员要求</text>
+                  <textarea class='textarea_style' style='height:62px;' bindconfirm='getTeamRequire' bindblur='getTeamRequire'></textarea>
+                </view>
+                <view class='content_item'>
+                  <text>价格预算</text>
+                  <textarea class='textarea_style' style='width:20%' bindconfirm='getTeamPrice' bindblur='getTeamPrice'></textarea>
+                </view>
+                <view class='content_item'>
+                  <text>组队人数</text>
+                  <textarea class='textarea_style' style='width:20%' bindconfirm='getTeamMemberNum' bindblur='getTeamMemberNum'></textarea>
+                </view>
+                <view class='content_post'>
+                  <text class='get_post' bindtap='getPost'>》点击生成海报</text>
+                  <!-- <image src='{{act_img}}' mode='aspectFill' style='height:128px;width:100%;background-color:#EEEEEE;'></image> -->
+                  <!-- <view class='chooseImage' bindtap='chooseImage'></view> -->
+                  <canvas style="width: 100%; height: 159px;" canvas-id="post" v-if='{{hasPost}}'></canvas>
+                </view>
+                <view class='content_item' style='justify-content: space-between;'>
+                  <view class='location' bindtap='addLocation'>
+                    <image wx:if="{{!location}}" src='../../images/like.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <image wx:if="{{location}}" src='../../images/like2.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <text style='margin-left:6px;padding-bottom:7px;'>
+                      {{locationName?locationName:"添加位置信息"}}
+                    </text>
+                  </view>
+                  <view class='share_to_circle'>
+                    <image src='../../images/sharetocircle.png' style='height:9px;width:9px;'></image>
+                    <text style='margin-left:6px'>同步到朋友圈</text>
+                  </view>
+                </view>
+                <view class='content_item' style='justify-content:center;'>
+                  <text class='new' bindtap='publishTeam'>创建</text>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view style='height:100%' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+            <view style='height:{{content_position}}px;background-color:white;'></view>
+            <!-- 发布话题 -->
+            <view class='content'>
+              <view class='content_box'>
+                <view class='content_item' style='height:36%;'>
+                  <textarea bindinput='onTextInput' placeholder="在这里写下你的想法..." focus="{{focus}}" style='padding-top:20px;'></textarea>
+                  <!-- <text bindtap='changeToTextarea'
+                          style='display:{{textView}};color:{{textColor}}'>
+                          {{content_text}}
+                        </text> -->
+                </view>
+                <!-- <view class='content_item' style='margin-bottom:50px;'>
+                        <text class='tag' wx:for="{{tags}}" wx:key="*this">{{item}}</text>
+                        <text class='tag_add'>  +  </text>
+                      </view> -->
+                <view class='content_item' style='width:100%;flex-wrap: wrap;'>
+                  <block wx:for="{{preImg}}" wx:key="this">
+                    <image src="{{item}}" style='height:94px;width:94px;background-color:#EEEEEE;margin-right:5px;margin-bottom:5px;'></image>
+                  </block>
+                  <image style='height:94px;width:94px;background-color:#EEEEEE;' bindtap='onAddImage'></image>
+                </view>
+                <view class='content_item'>
+                  <view class='location' bindtap='addLocation'>
+                    <image wx:if="{{!location}}" src='../../images/like.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <image wx:if="{{location}}" src='../../images/like.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <text style='margin-left:6px;padding-bottom:7px;'>
+                      {{locationName?locationName:"添加位置信息"}}
+                    </text>
+                  </view>
+                  <!-- <view class='share_to_circle'>
+                          <image src='../../images/sharetocircle.png' style='height:9px;width:9px;'></image>
+                          <text style='margin-left:6px'>同步到朋友圈</text>
+                        </view> -->
+                </view>
+                <view class='content_item' style='justify-content:center;'>
+                  <text class='new' bindtap='confirm'>发布</text>
+                </view>
+              </view>
+            </view>
+            <view style='height:20px;background-color:white;'></view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+</view>

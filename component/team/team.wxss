@@ -1,0 +1,45 @@
+/* team.wxss */
+.content_info{
+    display: flex;
+    flex-direction: column;
+    width: 92.5%;
+    margin-left: 14px;
+  }
+  .info_box{
+    display: flex;
+    flex-direction: row;
+    margin-top: 8rpx;
+  }
+  .user_info{
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    margin-left: 15rpx;
+  }
+  .date_info{
+    font-size:11px;
+    color:#848484;
+  }
+  .icon_box1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top:8px;
+    padding: 5px;
+  }
+  .item-number{
+    height: 100%;
+    position: relative;
+  }
+  .textnumber{
+    font-size: 8px;
+    position: absolute;
+    left: 12px;
+    top: -10px;
+  }
+  .location_info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top:30rpx;
+  }

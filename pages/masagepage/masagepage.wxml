@@ -1,0 +1,102 @@
+<!-- pages/masagepage/masagepage.wxml -->
+<view class='page'>
+  <!-- <view class='titleBar' style='height:{{titlebar_height}}px;background-color:white'>
+<view bindtap='clicktoback'>
+<image src='../../images/return.png' style='margin-top: {{item_icon_position}}-45px;margin-left: 5px;height: 13px;width: 19px;'></image>
+    <image src='https://cloud-minapp-26901.cloud.ifanrusercontent.com/1hWRKX802Bk6ItM4.png' 
+      style='margin-top: {{item_icon_position}}px;margin-left: 6px;height: 18px;width: 79px;'></image>
+ </view> -->
+  <!-- </view> -->
+  <view class="header">
+    <view class="weui-navbar" style='margin-top:0px;border-bottom: solid 1px #EFEFEF'>
+      <block wx:for="{{tabs}}" wx:key="*this">
+        <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" data-current="{{index}}" bindtap="tabClick">
+          <view class="weui-navbar__title">{{item}}</view>
+        </view>
+      </block>
+      <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+    <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}">
+      <swiper-item>
+        <!-- 讨论组 -->
+        <!-- <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+          <view style='height:{{content_position}}px;background-color:white;'></view>
+          
+          <view class='content_box' wx:for="{{content}}" wx:key="this">
+            <view class='avatar_box'>
+              <view class='user_info'>
+                <image src='../../images/post.png' style='height:50px;width:80px;'></image>
+                <view class='user_nanme'>
+                  <text style='font-size:9px;margin-left:15px;font-weight:bold;'>轰趴队</text>
+                  <text style='font-size:12px;margin-left:15px;padding-top:1px;font-weight:bold'>
+                    今晚有大活动哦
+                  </text>
+                </view>
+              </view>
+              <view class='newtopic'>
+                <text style='font-size:8px;margin-left:33px;padding-right:0px;padding-top:10px;color:#6B6B6B'>
+                  3分钟前
+                </text>
+                <text style='font-size:12px;margin-left:46px;padding-top:5px;color:white;border-radius:45%;background-color:rgb(224, 105, 240)'>
+                  11
+                </text>
+              </view>
+            </view>
+          </view>
+        </scroll-view> -->
+      </swiper-item>
+      <swiper-item>
+        <!-- <scroll-view style='height:100%' scroll-y bindscroll="onPageScroll" class="weui-tab__content"> -->
+          <view style='height:{{content_position}}px;background-color:white;'></view>
+          <!-- 信息 -->
+          <view class='content_box' wx:for="{{commentMsg}}" wx:key="{{index}}">
+            <!-- <view class='avatar_box'> -->
+              <!-- <view class='user_info'> -->
+                <image src='{{item.owner.avatarUrl}}' style='height:30px;width:30px;border-radius:50%'></image>
+                <view class='user_name'>
+                  <view style='font-size:10px;font-weight:bold;'>
+                    {{item.owner.nickName}}
+                  </view>
+                  <view style='font-size:8px;color:#6B6B6B'>
+                    {{item.createTime}}
+                  </view>
+                  <view style='font-size:12px;font-weight:bold;'>
+                    {{item.content}}
+                  </view>
+                <!-- </view> -->
+              <!-- </view> -->
+              <!-- <view class='newtopic'>
+                <image src='../../images/post.png' style='height:50px;width:80px;'></image>
+              </view> -->
+            </view>
+          </view>
+
+          <view class='content_box' wx:for="{{msg}}" wx:key="{{index}}">
+            <!-- <view class='avatar_box'> -->
+              <!-- <view class='user_info'> -->
+                <image src='{{item.status==0?item.participant.avatarUrl:item.owner.avatarUrl}}' style='height:30px;width:30px;border-radius:50%'></image>
+                <view class='user_name'>
+                  <view style='font-size:10px;font-weight:bold;'>
+                    {{item.status==0?item.participant.nickName:item.owner.nickName}}
+                  </view>
+                  <view style='font-size:8px;color:#6B6B6B'>
+                    {{item.createTime}}
+                  </view>
+                  <view style='font-size:12px;font-weight:bold;'>
+                    {{item.status==0?'申请加入组队':'同意了你的申请'}}
+                  </view>
+                </view>
+              <!-- </view> -->
+              <button wx:if="{{item.status==0}}" bindtap="agree" size="mini" style="height:50rpx;font-size:12px;" id="{{item._id}}">同意</button>
+              <!-- <view class='newtopic'>
+                <image src='../../images/post.png' style='height:50px;width:80px;'></image>
+              </view> -->
+            <!-- </view> -->
+          </view>
+
+          <!-- <view style='height:20px;background-color:white;'></view> -->
+        <!-- </scroll-view> -->
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

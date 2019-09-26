@@ -1,0 +1,78 @@
+/* component/topic/topic.wxss */
+.content_info{
+  display: flex;
+  flex-direction: column;
+  width: 92.5%;
+  margin-left: 14px;
+}
+.info_box{
+  display: flex;
+  flex-direction: row;
+}
+.user_info{
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  margin-left: 15rpx;
+}
+.team_info{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.date_info{
+  font-size:11px;
+  color:#848484;
+}
+.icon_box1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top:8px;
+  padding: 5px;
+}
+.item-number{
+  height: 100%;
+  position: relative;
+}
+.location_info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top:30rpx;
+}
+
+.icon_box2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+
+.img_box2{
+  width: 100%;
+  margin-top:10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.text_title{
+  font-size: 14px;
+  padding: 4px 0 0 0;
+  font-weight:bold;
+}
+.content_item{
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.textnumber{
+  font-size: 8px;
+  position: absolute;
+  left: 12px;
+  top: -10px;
+  
+}

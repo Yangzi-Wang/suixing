@@ -1,0 +1,268 @@
+<view class="page">
+  <view class='modal_style' wx:if="{{show_modal}}" bindtap='closeChooseModal'></view>
+  <view class='animation_box' style='left:{{current_windowWidth}}px' animation="{{animation}}">
+    <scroll-view scroll-y class='choose_box' style='margin-top:{{titlebar_height}}px;height:({{current_windowHeight}}-{{titlebar_height}})px' wx:if="{{activeIndex == 0}}">
+
+      <text class='text_title'>活动时间</text>
+      <view class='content_item' style='margin-left:27px;'>
+        <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              <text decode="true">&nbsp;&nbsp;</text>
+              {{date}}
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class='text_title'>选择城市</text>
+      <view class='content_item'>
+        <view class ='dateAndTime'>
+        <region-picker bind:regionPickerEvent="onGetRegion"></region-picker>
+          <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <view class="picker_style" style='margin-left:0;'>
+            <text decode="true">&nbsp;&nbsp;</text>
+              {{region}}
+            </view>
+          </picker> -->
+        </view>
+      </view>
+
+      <!-- <text class='text_title'>其他城市</text>
+      <view class='content_item' style='margin-left:27px;'>
+      <region-picker></region-picker> -->
+        <!-- <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              {{date}}
+            </view>
+          </picker>
+          <text style='background-color:white;margin-left:30px;'>-</text>
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <view class="picker_style">
+              {{time}}
+            </view>
+          </picker>
+        </view> -->
+      <!-- </view> -->
+
+      <!-- <text class='text_title'>活动距离</text>
+      <view class='content_item' style='margin-left:27px;'>
+        <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              {{date}}
+            </view>
+          </picker>
+          <text style='background-color:white;margin-left:30px;'>-</text>
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <view class="picker_style">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+      </view> -->
+
+      <!-- <text class='text_title'>价格预算</text>
+      <view class='content_item' style='margin-left:27px;'>
+        <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              {{date}}
+            </view>
+          </picker>
+          <text style='background-color:white;margin-left:30px;'>-</text>
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <view class="picker_style">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+      </view> -->
+
+      <!-- <text class='text_title'>活动人数</text>
+      <view class='content_item' style='margin-left:27px;'>
+        <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              {{date}}
+            </view>
+          </picker>
+          <text style='background-color:white;margin-left:30px;'>-</text>
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <view class="picker_style">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+      </view> -->
+
+      <text class='text_title'>活动类型</text>
+      <view class='content_item'>
+        <!-- <text class='tag' wx:for="{{tags}}" wx:key="*this">{{item}}</text> -->
+        <view class='tag' wx:for="{{labels}}" wx:key="{{item._id}}">{{item.name}}</view>
+                    
+                      <picker bindchange="bindLabelChange" value="{{index}}" range="{{labelsArr}}" range-key='name'>
+                        <view class='tag_add'>+</view>
+                      </picker>
+        <!-- <text class='tag_add'>  +  </text> -->
+      </view>
+
+      <!-- <text class='text_title'>活动推荐</text>
+      <view class='content_item'>
+        <text class='tag' wx:for="{{tags}}" wx:key="*this">{{item}}</text>
+        <text class='tag_add'>  +  </text>
+      </view> -->
+
+      <view class='content_item' style='justify-content:center;margin-top:40px;margin-bottom:40px;' bindtap='closeChooseModal'>
+        <text class='confirm'>确认</text>
+      </view>
+
+    </scroll-view>
+
+    <!--筛选话题-->
+    <scroll-view scroll-y class='choose_box' style='margin-top:{{titlebar_height}}px;height:({{current_windowHeight}}-{{titlebar_height}})px' wx:if="{{activeIndex == 1}}">
+
+      <text class='text_title'>活动地点</text>
+      <view class='content_item'>
+        <view class ='dateAndTime'>
+          <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <view class="picker_style" style='margin-left:0;'>
+            <text decode="true">&nbsp;&nbsp;</text>
+              {{region}}
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class='text_title'>其他城市</text>
+      <view class='content_item' style='margin-left:27px;'>
+        <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              {{date}}
+            </view>
+          </picker>
+          <text style='background-color:white;margin-left:30px;'>-</text>
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <view class="picker_style">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class='text_title'>活动距离</text>
+      <view class='content_item' style='margin-left:27px;'>
+        <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              {{date}}
+            </view>
+          </picker>
+          <text style='background-color:white;margin-left:30px;'>-</text>
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <view class="picker_style">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class='text_title'>活动人数</text>
+      <view class='content_item' style='margin-left:27px;'>
+        <view class ='dateAndTime'>
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker_style">
+              {{date}}
+            </view>
+          </picker>
+          <text style='background-color:white;margin-left:30px;'>-</text>
+          <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <view class="picker_style">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <text class='text_title'>活动类型</text>
+      <view class='content_item'>
+        <text class='tag' wx:for="{{tags}}" wx:key="*this">{{item}}</text>
+        <text class='tag_add'>  +  </text>
+      </view>
+
+      <text class='text_title'>活动推荐</text>
+      <view class='content_item'>
+        <text class='tag' wx:for="{{tags}}" wx:key="*this">{{item}}</text>
+        <text class='tag_add'>  +  </text>
+      </view>
+
+      <view class='content_item' style='justify-content:center;margin-top:40px;margin-bottom:40px;' bindtap='closeChooseModal'>
+        <text class='confirm'>确认</text>
+      </view>
+
+    </scroll-view>
+  </view>
+  <view class='titleBar' style='height:{{titlebar_height}}px;background-color:white'>
+    <image src='../../images/like.png' 
+      style='margin-top: {{item_icon_position}}px;margin-left: 15px;height: 18px;width: 79px;'></image>
+  </view>
+
+  <!--定位以及筛选-->
+  <view class="header" style='margin-top: {{header_position}}px;'>
+    <view class='header_icon'>
+      <image src='../../images/like.png' style='width:17px;height:23px;margin-left:27px;' mode="widthFix"></image>
+      <text style='position:absolute;margin-top:22px;margin-left:-22px;'>{{city}}</text>
+    </view>
+    
+    <view class='search'>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" bindconfirm="search" style='height:100%;width:100%;background-color:#EEEEEE;border-radius: 5px'/>
+    </view>
+      
+    
+    <view class='header_icon' bindtap='showChooseModal'>
+      <image src='../../images/like.png' style='width:21px;height:21px;margin-right:27px;'></image>
+      <text style='position:absolute;margin-top:22px;margin-left:-50px;'>筛选</text>
+    </view>
+  </view>
+  
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar" style='margin-top:{{navbar_position}}px;border-bottom: solid 1px #EFEFEF'>
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" data-current="{{index}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            
+            <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}" >
+              <swiper-item>
+                <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll"  class="weui-tab__content">
+                  <view style='height:{{content_position}}px;background-color:white;'></view>
+                  <!--附近组队-->
+                  
+                  <team class='content_box' wx:for="{{teams}}" wx:key="index" team="{{item}}">
+                    <!-- <team item="{{item}}"></team> -->
+                  </team>
+
+                  <view style='height:20px;background-color:white;'></view>
+                </scroll-view>
+              </swiper-item>
+              
+              <swiper-item>
+                <scroll-view style='height:100%' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+                  <view style='height:{{content_position}}px;background-color:white;'></view>
+                  <!--热门话题-->
+                  <topic class='content_box' wx:for="{{hotTopics}}" wx:key="{{item._id}}" topic="{{item}}"></topic>
+
+                  <view style='height:20px;background-color:white;'></view>
+                </scroll-view>
+              </swiper-item>
+            </swiper>
+
+        </view>
+    </view>
+</view>

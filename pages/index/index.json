@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "team":"../../component/team/team",
+    "topic":"../../component/topic/topic",
+    "region-picker":"../../component/regionPicker/regionPicker"
+  },
+    "navigationStyle": "custom"
+}
