@@ -1,9 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const API = require('../../API/api');
+const API = require('../../API/api')
+const util = require('../../utils/util.js')
 var sliderWidth = 0; // 需要设置slider的宽度，用于计算中间位置
 let lat = null, lng = null;
+let sieve_city;
 
 Page({
   data: {
@@ -27,13 +29,13 @@ Page({
     teams: [],
     show_modal: false,
     city: '定位中',
-    date: '2016-09-01',
-    region: ['广东省', '广州市', '海珠区'],
+    date: '',
     labels: [],
-    labelsArr:[],
+    labelsArr: [],
     hotTopics: [],
     myTopics: [],
     isLogin: false,
+    maxDistance: '3km'
     // currentContentId:0,
     // currentImgId:0,
     //like:"https://cloud-minapp-26901.cloud.ifanrusercontent.com/1hWThugmGDwCoqyx.png",
@@ -61,62 +63,77 @@ Page({
 
 
 
-  loadHotTopics: function () {
+  loadHotTopics: function (maxDistance) {
+    let data = {
+      lat: lat,
+      lng: lng,
+      getNear: true,
+      maxDistance: maxDistance || 10000
+    }
 
-    API.getTopics(lat, lng).then(res => {
+    API.getTopics(data).then(res => {
       //  console.log(res)
-      const topics = res.map(item => {
-        //格式化日期
-        var date = item.updatedAt
-        if (date && date != '')
-          item.createTime = date.slice(5, 10) + ' ' + date.substring(11, 16)
+      // const topics = res.map(item => {
+      //格式化日期
+      // item.updatedAt=util.formatTime(new Date(item.updatedAt))
 
-        if (item.good && item.good.indexOf(app.globalData.userid) != -1) {
-          item.likeBool = true
-        } else {
-          item.likeBool = false
-        }
-        return item
-      })
+      // if (item.good && item.good.indexOf(app.globalData.userid) != -1) {
+      //   item.likeBool = true
+      // } else {
+      //   item.likeBool = false
+      // }
+      // return item
+      // })
 
       this.setData({
-        hotTopics: topics
+        hotTopics: res
       })
     })
   },
 
-  loadTeams: function () {
+  loadTeams: function (maxDistance) {
+    let data = {
+      lat: lat,
+      lng: lng,
+      getNear: true,
+      maxDistance: maxDistance || 3
+    }
 
-    API.getTeams(lat, lng).then(res => {
-      const teams = res.map(item => {
-        var date = item.updatedAt
-        if (date && date != '')
-          item.createTime = date.slice(5, 10) + ' ' + date.substring(11, 16)
+    API.getTeams(data).then(res => {
+      // const teams = res.map(item => {
+      //   item.updatedAt=util.formatTime(new Date(item.updatedAt))
 
-        if (item.good && item.good.indexOf(app.globalData.userid) != -1) {
-          item.likeBool = true
-        } else {
-          item.likeBool = false
-        }
-        return item
-      })
+      //   if (item.good && item.good.indexOf(app.globalData.userid) != -1) {
+      //     item.likeBool = true
+      //   } else {
+      //     item.likeBool = false
+      //   }
+      //   return item
+      // })
       this.setData({
-        teams: teams
+        teams: res
       })
     })
+  },
+
+  distanceChange(e) {
+    if (e.detail.value == 0.5) {
+      this.setData({
+        maxDistance: e.detail.value * 1000 + 'm'
+      })
+    } else {
+      this.setData({
+        maxDistance: e.detail.value + 'km'
+      })
+    }
+    this.loadTeams(e.detail.value)
+
   },
 
   bindDateChange(e) {
     //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
-    })
-  },
-
-  bindRegionChange(e) {
-    //console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value
     })
   },
 
@@ -184,7 +201,7 @@ Page({
   },
 
   onLoad: function () {
-    var that = this;
+    let that = this;
 
     wx.getSystemInfo({
       success: function (res) {
@@ -239,11 +256,12 @@ Page({
             content: '需要获取您的地理位置，请确认授权',
             success: function (res) {
               if (res.cancel) {
-                wx.showToast({
-                  title: '拒绝授权',
-                  icon: 'none',
-                  duration: 1000
-                })
+                // wx.showToast({
+                //   title: '拒绝授权',
+                //   icon: 'none',
+                //   duration: 1000
+                // })
+                that.getDefaultLocation()
               } else if (res.confirm) {
                 wx.openSetting({
                   success: function (dataAu) {
@@ -254,13 +272,14 @@ Page({
                         duration: 1000
                       })
                       //再次授权，调用wx.getLocation的API
-                      this.getLocation()
+                      that.getLocation()
                     } else {
                       wx.showToast({
                         title: '授权失败',
                         icon: 'none',
                         duration: 1000
                       })
+                      console.log('2')
                     }
                   }
                 })
@@ -269,11 +288,11 @@ Page({
           })
         } else if (res.authSetting['scope.userLocation'] == undefined) {
           //调用wx.getLocation的API
-          this.getLocation()
+          that.getLocation()
         }
         else {
           //调用wx.getLocation的API
-          this.getLocation()
+          that.getLocation()
         }
       }
     })
@@ -282,7 +301,6 @@ Page({
   },
 
   onShow: function () {
-
     // wx.showToast({
     //   title: '一键转发到朋友圈呀！',
     //   icon: 'none',
@@ -303,7 +321,7 @@ Page({
       hasUserInfo: true
     })
   },
-  
+
   getLocation: function () {
     let that = this
     console.log('定位')
@@ -314,7 +332,7 @@ Page({
         lng = res.longitude
         app.globalData.lat = lat
         app.globalData.lng = lng
-        console.log(lat,lng)
+        console.log(lat, lng)
         API.locate({
           lat: lat,
           lng: lng
@@ -322,27 +340,77 @@ Page({
           that.setData({
             city: res.city
           })
+          sieve_city = res.city
         })
         that.loadHotTopics()
         that.loadTeams()
       }
     })
   },
-  getLabels(){
-    API.getLabels().then(res=>{
+  getDefaultLocation: function () {
+    let that = this
+
+    lat = 23.117
+    lng = 113.27
+    app.globalData.lat = lat
+    app.globalData.lng = lng
+
+    API.locate({
+      lat: lat,
+      lng: lng
+    }).then(res => {
+      res.city && that.setData({
+        city: res.city
+      })
+      sieve_city = res.city || '广州市'
+      res.msg && console.log(res.msg)
+    })
+    that.loadHotTopics()
+    that.loadTeams()
+  },
+  getLabels() {
+    API.getLabels().then(res => {
       this.setData({
-        labelsArr:res
+        labelsArr: res
       })
     })
   },
-  bindLabelChange(e){
+  bindLabelChange(e) {
     let newArr = this.data.labels
     newArr.push(this.data.labelsArr[e.detail.value])
     this.setData({
-      labels:newArr
+      labels: newArr
     })
   },
-  onGetRegion(e){
-    console.log(e.detail.city)
+  onGetRegion(e) {
+    sieve_city = e.detail.city
+  },
+
+  sieve() {
+    this.animation.translateX(237).step(),
+      this.setData({
+        animation: this.animation.export(),
+        show_modal: false,
+      })
+    let labels = this.data.labels.map(item => {
+      return item._id
+    })
+    let data = {
+      type: 0,
+      lat: app.globalData.lat,
+      lng: app.globalData.lng,
+      labels: labels,
+      date: this.data.date,
+      city: sieve_city
+    }
+    wx.navigateTo({
+      url: '../search/search?opt=' + JSON.stringify(data)
+    })
+
+  },
+  labelsClean() {
+    this.setData({
+      labels: []
+    })
   }
 })

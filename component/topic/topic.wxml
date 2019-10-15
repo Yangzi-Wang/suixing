@@ -1,11 +1,12 @@
 <!-- component/topic/topic.wxml -->
-<view class='content_info' bindtap=''>
+<view class='content_info' bindtap="getDetail" wx:if="{{showme}}">
     <view class='info_box' wx:if="{{showOwner}}">
-        <image src='{{ item.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%'></image>
+        <image src='{{ item.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%' catchtap="navToCenter"></image>
         <view class='user_info'>
             <text style='font-weight:bold;'>{{item.owner.nickName}}</text>
             <text>{{item.owner.intro}}</text>
         </view>
+        <view wx:if="{{item.owner._id==userid}}" class="delete" catchtap="delete">删除</view>
     </view>
     <text style='font-size:13px;margin-top:12px;'>{{item.content}}</text>
     <view class='img_box2'>
@@ -14,30 +15,30 @@
         </view>
     </view>
     <view class='location_info'>
-        <image src='../../images/like.png' style='height:18px;width:14px' mode='scaleToFill'></image>
+        <image src='../../images/location.png' style='height:18px;width:14px' mode='scaleToFill'></image>
         <text style='font-size:11px;color:#848484;margin-left:4px;'>
             {{item.locationName}} {{item.distance>=1000?(item.distance/1000+'km'):(item.distance+'m')}}
         </text>
     </view>
     <view class='date_info'>
-        {{item.createTime}}
+        {{item.updatedAt}}
     </view>
 </view>
-<view class='icon_box1'>
+<view class='icon_box1' wx:if="{{showme}}">
     <view class='item-number'>
-        <image src='../../images/like.png' style='height:17px;width:17px'></image>
+        <image src='../../images/forward.png' style='height:17px;width:17px'></image>
         <view class='textnumber'>
             <text></text>
         </view>
     </view>
     <view class='item-number'>
-        <image src='../../images/like.png' style='height:18px;width:23px'></image>
+        <image src='../../images/comment.png' style='height:18px;width:23px'></image>
         <view class='textnumber'>
-            <text></text>
+            <text>{{item.commentCount==0?'':item.commentCount}}</text>
         </view>
     </view>
     <view class='item-number'>
-        <image src="{{item.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' id='{{item._id}}' bindtap='like'></image>
+        <image src="{{item.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' bindtap='like'></image>
         <view class='textnumber'>
             <text>{{item.goodCount==0?'':item.goodCount}}</text>
         </view>

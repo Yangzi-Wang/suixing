@@ -7,6 +7,7 @@ App({
 
     let that = this
 
+
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
@@ -19,7 +20,7 @@ App({
         that.globalData.userid = res.data
       },
       fail(){
-        wx.login({
+        wx.login({    // 发送 res.code 到后台换取 openId, sessionKey, unionId
           success: res => {
             wx.setStorage({
               key: "code",
@@ -31,13 +32,6 @@ App({
       }
     })
 
-    // 登录
-    // wx.login({
-    //   success: res => {
-    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        
-    //   }
-    // })
     
     // 获取用户信息
     /*wx.getSetting({
@@ -77,6 +71,7 @@ App({
     userInfo: null,
     userid:null,
     lat:null,
-    lng:null
+    lng:null,
+    uploadUrl:'https://www.sh-invi.cn/admin/api/upload'
   }
 })

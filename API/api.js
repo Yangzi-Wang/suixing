@@ -1,7 +1,7 @@
 // api.js
 
-const API_BASE_URL = //'http://sx.sh-invi.cn/weixin/api';
- 'http://localhost:3000/weixin/api';
+const API_BASE_URL = 'https://www.sh-invi.cn/weixin/api';
+//  'http://localhost:3000/weixin/api';
 
 const request = (url, method, data) => { 
 
@@ -58,12 +58,12 @@ const request = (url, method, data) => {
 
 module.exports ={
     
-  getTopics:(lat,lng) =>{
-    return request('/topics/'+lat+'/'+lng,'get','')    //话题列表
+  getTopics:(data) =>{
+    return request('/topics','post',data)    //话题列表
   },
 
-  getTeams: (lat,lng) => {
-    return request('/teams/'+lat+'/'+lng, 'get', '')    //组队列表
+  getTeams: (data) => {
+    return request('/teams', 'post', data)    //组队列表
   },
 
   getTopicDetail:(id) =>{
@@ -87,6 +87,14 @@ module.exports ={
     return request('/team', 'post', data)         //提交组队
   },
 
+  deleteTopic: (id) => {
+    return request('/topic/'+id, 'delete', '')         //删除话题
+  },
+
+  deleteTeam: (id) => {
+    return request('/team/'+id, 'delete', '')         //删除组队
+  },
+
   login:(data)=>{
     return request('/openid','post',data)         //交换openid
   },
@@ -99,17 +107,33 @@ module.exports ={
     return request('/user','post',data)         //获取用户信息
   },
 
+  getUserBasicInfo:(id) =>{
+    return request('/userBasicInfo/'+id,'get','')         //获取用户基本信息
+  },
+
+  updateUserBasicInfo:(data) =>{
+    return request('/userBasicInfo','put',data)         //修改用户基本信息
+  },
+
 
   getCollectList:(data) =>{
     return request('/user/collection','post',data)         //收藏列表
   },
 
-  getInterestList: (data) => {
-    return request('/user/interest/' + data, 'get', '')      //我的关注
+  getFollowList: (data) => {
+    return request('/user/follow/' + data, 'get', '')      //我的关注
   },
 
   getFansList: (data) => {
     return request('/user/fans/' + data, 'get', '')         //我的粉丝
+  },
+
+  follow: (data) => {
+    return request('/follow', 'post', data)         //关注
+  },
+
+  followCancel: (data) => {
+    return request('/followCancel', 'post', data)         //取消关注
   },
 
   getCommentsMsg: (data) => {
@@ -151,6 +175,10 @@ module.exports ={
     return request('/comment','post',data)          //添加评论
   },
 
+  getCommentsOnly: (id) => {
+    return request('/comments/'+id, 'get', '')    //更新评论列表
+  },
+
   join:(data)=>{
     return request('/message','post',data)          //加入组队
   },
@@ -164,7 +192,11 @@ module.exports ={
   },
 
   getRegion: () => {
-    return request('/region', 'get', '')    //
+    return request('/region', 'get', '')    //获取省市数据
+  },
+
+  sieve: (data) => {
+    return request('/sieve', 'post', data)    //筛选
   },
 
 }

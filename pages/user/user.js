@@ -7,7 +7,6 @@ var sliderWidth = 0; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
   data: {
-    motto: 'Hello World',
     inputVal: "",
     inputShowed: false,
     tabs: ["活动", "话题", "收藏"],
@@ -67,22 +66,6 @@ Page({
   //     })
   //   }
   // },
-
-  like: function () {
-    var that = this
-    if (that.data.likeBool) {
-      that.setData({
-        like: "https://cloud-minapp-26901.cloud.ifanrusercontent.com/1hWThugmGDwCoqyx.png",
-        likeBool: false
-      })
-    } else {
-      that.setData({
-        like: "https://cloud-minapp-26901.cloud.ifanrusercontent.com/1hWf6lmIXvw47oJs.png",
-        likeBool: true
-      })
-    }
-
-  },
 
   // loadMyTopics: function () {
 
@@ -239,37 +222,17 @@ Page({
     //console.log(this.data.sliderOffset)
   },
 
-  //事件处理函数
-  bindViewTap: function () {
+  
+
+  getBasicInfo(){
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../settings/settings'
     })
   },
 
 
   onLoad: function () {
-    var that = this;
-    // that.loadMyTopics()
-
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权
-          let data = {
-            id: app.globalData.userid,
-            lat: app.globalData.lat,
-            lng: app.globalData.lng
-          }
-          API.getUser(data).then(res=>{
-            that.setData({
-              authorized:true,
-              userInfo:res
-            })
-            // console.log(res)
-          })
-        }
-      }
-    })
+    var that = this
 
     wx.getSystemInfo({
       success: function (res) {
@@ -291,14 +254,14 @@ Page({
       },
     })
 
-    if (app.globalData.userInfo) {
+    /*if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         avatar: app.globalData.userInfo.avatarUrl,
         userName: app.globalData.userInfo.nickName,
         authorized: true
       })
-    } /*else if (this.data.canIUse) {
+    }*/ /*else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -319,6 +282,30 @@ Page({
         }
       })
     }*/
+  },
+
+  onShow(){
+    let that = this
+
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权
+          let data = {
+            id: app.globalData.userid,
+            lat: app.globalData.lat,
+            lng: app.globalData.lng
+          }
+          API.getUser(data).then(res=>{
+            that.setData({
+              authorized:true,
+              userInfo:res
+            })
+            // console.log(res)
+          })
+        }
+      }
+    })
   },
 
   getUserInfo: function (e) {

@@ -1,7 +1,6 @@
 <!-- component/regionPicker/regionPicker.wxml -->
 <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-    <view class="picker_style" style='margin-left:0;'>
-        <text decode="true">&nbsp;&nbsp;</text>
+    <view class="picker_style">
         {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
     </view>
 </picker>

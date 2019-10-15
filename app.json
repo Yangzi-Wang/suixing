@@ -5,7 +5,9 @@
     "pages/search/search",
     "pages/new/new",
     "pages/user/user",
-    "pages/fans/fans",
+    "pages/follow/follow",
+    "pages/settings/settings",
+    "pages/center/center",
     "pages/masagepage/masagepage"
   ],
   "permission": {

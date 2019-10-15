@@ -1,0 +1,184 @@
+/* pages/center/center.wxss */
+page,
+.page,
+.page__bd{
+  height: 100%;
+}
+.page__bd{
+  padding-bottom: 0;
+}
+.weui-navbar__slider{
+  bottom:6px;
+  width:0.2em;
+  background-color:#AB4CFA;
+}
+.weui-navbar{
+  position: fixed;
+  background-color: white;
+}
+
+.weui-navbar__item.weui-bar__item_on{
+  color:#AB4CFA
+}
+.titleBar{
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  z-index: 1;
+}
+.header{
+  height: 144px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  padding-top: 40rpx;
+  background-color: white;
+  z-index: 1;
+}
+.search{
+  margin-top: 8px;
+  width: 60%;
+  height: 10px;
+}
+.weui-tab__content{
+  background-color: white
+}
+.swiper_style{
+  height: 100%;
+}
+.tips{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.btn1{
+  width: 116rpx;
+  height: 116rpx;
+  background-color: white;
+  color: #999999;
+  border-radius: 0rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.btnImg {
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+}
+.btn1::after {
+  border: 0; 
+}
+.content_box{
+  width: 100%;
+}
+.content_info{
+  display: flex;
+  flex-direction: column;
+  width: 92.5%;
+  margin-left: 14px;
+}
+.info_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 8px;
+} 
+.user_info{
+  display: flex;
+  flex-direction: row;
+}
+.team_info{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+}
+.date_info{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.img_box2{
+  width: 100%;
+  margin-top:10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.avatar_box{
+  /* width: 91%; */
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
+  /* margin-left: 17px; */
+  text-align: center;
+}
+.btn_follow{
+    position: absolute;
+    top: 40rpx;
+    right: 40rpx;
+
+  /* display: flex;
+  flex-direction: row; */
+  /* margin-top: 6px; */
+}
+.avatar_style{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fans{
+  width: 36%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.item-number{
+  height: 100%;
+  position: relative;
+}
+.textnumber{
+  font-size: 8px;
+  position: absolute;
+  left: 12px;
+  top: -10px;
+  
+}
+.icon_box1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+   margin-top:8px;
+  padding: 5px;
+}
+.icon_box2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+.clickcolor{
+  color:  #AB4CFA;
+}
+/* .masageclick{
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
+} */
+.masagenumber{
+position: relative;
+left: -38px;
+top: -17px;
+font-size: 20px;
+color: #AB4CFA;
+}

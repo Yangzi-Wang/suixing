@@ -9,7 +9,7 @@ Component({
   },
 
   data: {
-    multiIndex: [0, 0],
+    multiIndex: [15, 0],
     multiArray: [],
     provinces: [],
   },
@@ -49,7 +49,7 @@ Component({
         that.setData({
           provinces: res.provinces,
           'multiArray[0]': provinceNameArr,
-          'multiArray[1]': res.provinces[0].citys
+          'multiArray[1]': res.provinces[15].citys
         })
       })
     }

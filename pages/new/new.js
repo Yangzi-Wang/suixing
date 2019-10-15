@@ -10,12 +10,10 @@ var team_data={}
 
 Page({
   data: {
-    motto: 'Hello World',
+    
     inputVal: "",
     inputShowed: false,
     tabs: ["创建组队", "发布话题"],
-    labels: [],
-    labelsArr:[],
     sliderOffset: 0,
     sliderLeft: 0,
     activeIndex: 1,
@@ -30,18 +28,17 @@ Page({
     content_position: 0,
     content_position2: 0,
     titleBarHeight: 32,
-    content: ["", "", "", ""],
-    time: '',
-    date: '',
     act_img: '',
     content_text:'在这里写下你的想法...',
     preImg:[],
     images: [],
     tempImage:'',
-    // textView:"true",
-    // textareaView: "none",
+    team_data:{title:'',content:'',require:'',prince:'',memberNum:''},
+    labels: [],
+    labelsArr:[],
+    time: '',
+    date: '',
     focus:false,
-    // textColor:"#C8C8C8",
     locationName:"",
     location:[],
     hasPost:false
@@ -126,11 +123,11 @@ Page({
       this.publishTopic();
       return;
     }
-      let tempImgArr = new Array()
+      // let tempImgArr = new Array()
       for (var i = 0; i < len; i++) {
 
         wx.uploadFile({
-          url: 'http://localhost:3000/admin/api/upload',
+          url: app.globalData.uploadUrl,//'https://www.sh-invi.cn/admin/api/upload',
           filePath: that.data.preImg[i],
           name: 'file',
           header: {
@@ -310,20 +307,16 @@ Page({
     }
   },
 
-  // getUserInfo: function (e) {
-  //   //console.log(e)
-  //   app.globalData.userInfo = e.detail.userInfo
-  //   this.setData({
-  //     userInfo: e.detail.userInfo,
-  //     hasUserInfo: true
-  //   })
-  // },
+  /**
+   * 绘制海报
+   */
   getPost(){
+    const ctx = wx.createCanvasContext('post');
+
     if (team_data.title && team_data.memberNum && this.data.date && this.data.time){
       let title = team_data.title
       let memberNum = '规模：' + team_data.memberNum + '人'
       let date = this.data.date + ' ' + this.data.time
-      const ctx = wx.createCanvasContext('post');
       ctx.drawImage("../../images/postbg.jpg", 0, 0, 348, 159);
       ctx.setFontSize(12);
       ctx.setFillStyle("#ffffff");
@@ -353,7 +346,6 @@ Page({
     
   },
   getTeamTitle(e){
-    // console.log(e.detail.value)
     team_data.title=e.detail.value
   },
   getTeamContent(e) {
@@ -399,7 +391,7 @@ Page({
         success(res) {
           console.log(res.tempFilePath)
           wx.uploadFile({
-            url: 'http://localhost:3000/admin/api/upload',
+            url: app.globalData.uploadUrl,//'https://www.sh-invi.cn/admin/api/upload',
             filePath: res.tempFilePath,
             name: 'file',
             header: {
@@ -413,14 +405,31 @@ Page({
               team_data.location = that.data.location
               team_data.locationName = that.data.locationName
               team_data.labels = labels
-              console.log(team_data)
+              // console.log(team_data)
 
               API.postTeam(team_data).then(res => {
                 if (res.success) {
                   util.showSuccess("发布成功")
-                  wx.reLaunch({
+                  that.setData({
+                    ['team_data.title']:'',
+                    ['team_data.content']:'',
+                    ['team_data.require']:'',
+                    ['team_data.price']:'',
+                    ['team_data.memberNum']:'',
+                    labels:[],
+                    date:'',
+                    time:'',
+                    locationName:'',
+                    location:[],
+                    hasPost: false
+                  })
+                  // const ctx = wx.createCanvasContext('post');
+                  // ctx.clearRect(0, 0, 348, 159)
+
+                  wx.switchTab({
                     url: '../index/index'
                   })
+                  // console.log(team_data)
                 }
               }).catch(error => {
                 console.log(error)
@@ -429,6 +438,7 @@ Page({
             },
             fail: function (error) {
               console.log(error);
+              util.showModel("提示", "发布失败")
             }
           })
         }

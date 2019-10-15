@@ -1,0 +1,143 @@
+<!--pages/center/center.wxml-->
+<view class="page">
+  <!-- <view class='titleBar' style='height:{{titlebar_height}}px;background-color:white'>
+    <image src='../../images/like.png' style='margin-top: {{item_icon_position}}px;margin-left: 15px;height: 18px;width: 79px;'></image>
+  </view> -->
+  <!-- 个人信息 -->
+  <view class="header">
+  <!-- style='margin-top: {{header_position}}px;' -->
+    <view class='avatar_box'>
+      <!-- <view class='button_style'>
+        <image src='../../images/like.png' style='height:18px;width:18px;margin-left:16px;' mode='widthFix'></image>
+        <text style='font-size:10px;color:#4F4E4F;margin-left:6px;padding-top:4px;'></text>
+      </view> -->
+      <!-- 头像 -->
+      <view class='avatar_style'>
+        <image class='btnImg' src='{{userInfo.avatarUrl}}'></image>
+        <text style='font-size:12px;'>{{userInfo.nickName}}</text>
+        <text style='font-size:10px;color:#6B6B6B'>{{userInfo.intro}}</text>
+      </view>
+      <!-- <view class='masageclick'> -->
+        <view class='btn_follow'>
+          <!-- <image src='../../images/like.png' style='height:18px;width:19px;'></image> -->
+          <text style='font-size:10px;color:#AB4CFA;margin-left:6px;padding-top:4px;' bindtap="follow">{{follow?'取消关注':'+关注'}}</text>
+        </view>
+        <!-- <navigator open-type="navigate" hover-class="clickcolor" url="../masagepage/masagepage">
+          <label>
+            <image src='../../images/masage.png' style='height:50px;width:50px;padding-top:13px;'></image>
+            <text class='masagenumber'>12</text>
+          </label>
+        </navigator> -->
+      <!-- </view> -->
+    </view>
+    <view style='width:100%;display: flex;flex-direction: row;justify-content:center;'>
+      <view class='fans'>
+        <view>
+          <navigator open-type="navigate" hover-class="clickcolor" url="../fans/fans?key=0">
+            <label>
+              <text style='font-size:10px'>关注</text>
+              <text style='font-size:12px'>{{userInfo.followCount}}</text>
+            </label>
+          </navigator>
+        </view>
+        <view>
+          <navigator open-type="navigate" hover-class="clickcolor" url="../fans/fans?key=1">
+            <label>
+              <text style='font-size:10px'>粉丝</text>
+              <text style='font-size:12px'>{{userInfo.fansCount}}</text>
+            </label>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar" style='margin-top:{{navbar_position}}px;border-bottom: solid 1px #EFEFEF;'>
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <!-- 活动 -->
+      <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}">
+        <swiper-item>
+          <view style='height:100%;' class="weui-tab__content">
+          
+            <!-- 次级navbar -->
+            <!-- <view class="weui-tab"> -->
+              <view class="weui-navbar" style='margin-top:{{navbar_position2}}px;border-bottom: solid 1px #EFEFEF'>
+                <block wx:for="{{tabs_second}}" wx:key="*this">
+                  <view id="{{index+3}}" class="weui-navbar__item {{activeIndex2 == index+3 ? 'weui-bar__item_on' : ''}}" bindtap="tabClick2">
+                    <view class="weui-navbar__title" style='font-size:13px;'>{{item}}</view>
+                  </view>
+                </block>
+                <view class="weui-navbar__slider" style="width:0px;left: {{sliderLeft2}}px; transform: translateX({{sliderOffset2}}px); -webkit-transform: translateX({{sliderOffset2}}px);"></view>
+              </view>
+              <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" scroll-top="{{topNum}}" class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex2 != 3}}">
+                  <view style='height:{{content_position}}px;background-color:white;'></view>
+                  <!-- 发布过的活动 -->
+                  <team class='content_box' wx:for="{{userInfo.teams}}" wx:key="index" team="{{item}}"></team>
+                  <!-- 
+                                <view class='team_info'>
+                                  <text style='font-size:11px;color:#57FBF7;padding-bottom:4px;'>进行中</text>
+                                </view>     
+                         -->
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex2 != 4}}">
+                  参与过的活动
+                  <view style='height:{{content_position}}px;background-color:white;'></view>
+                  <!-- 
+                        <view class='team_info'>
+                          <text style='font-size:11px;color:#848484'>众生相livehouse</text>
+                          <text style='font-size:11px;color:#57FBF7'>进行中</text>
+                        </view>
+                   -->
+                </view>
+              </scroll-view>
+            <!-- <view style='height:20px;background-color:white;'></view> -->
+          </view>
+        </swiper-item>
+        <swiper-item>
+          <!-- <view style='height:100%;' class="weui-tab__content"> -->
+            <!-- 次级navbar -->
+            <!-- <view class="weui-tab"> -->
+              <!-- <view class="weui-navbar" style='margin-top:{{navbar_position2}}px;border-bottom: solid 1px #EFEFEF'>
+                      <block wx:for="{{tabs_topic}}" wx:key="*this">
+                        <view id="{{index+3}}" class="weui-navbar__item {{activeIndex2 == index+3 ? 'weui-bar__item_on' : ''}}" bindtap="tabClick2">
+                         <view class="weui-navbar__title" style='font-size:13px;'>{{item}}</view>
+                        </view>
+                      </block>
+                     <view class="weui-navbar__slider" style="width:0px;left: {{sliderLeft2}}px; transform: translateX({{sliderOffset2}}px); -webkit-transform: translateX({{sliderOffset2}}px);"></view>
+                    </view> -->
+              <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" scroll-top="{{topNum}}">
+                <view class="weui-tab__content" hidden="{{activeIndex2 != 3}}">
+                  <!-- 发布过的话题 -->
+                  <view style='height:{{content_position}}px;background-color:white;'></view>
+                  <topic class='content_box' wx:for="{{userInfo.topics}}" wx:key="{{item._id}}" topic="{{item}}"></topic>
+                  
+                  <!-- <view style='height:20px;background-color:white;'></view> -->
+                </view>
+                <!-- <view class="weui-tab__content" hidden="{{activeIndex2 != 4}}"-->
+                <!-- 浏览过的话题  -->
+                <!-- <view style='background-color:white;'></view>
+                  -->
+              </scroll-view>
+、            <view style='height:20px;background-color:white;'></view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" scroll-top="{{topNum}}" class="weui-tab__content">
+            <!-- 收藏 -->
+            <!-- <view style='background-color:white;'></view> -->
+            <view style='height:{{content_position}}px;background-color:white;'></view>
+            <team class='content_box' wx:for="{{collections}}" wx:key="index" team="{{item}}"></team>
+            <!-- <view style='height:20px;background-color:white;'></view> -->
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+</view>

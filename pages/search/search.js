@@ -38,6 +38,7 @@ Page({
     /**
      * 搜索接口
      */
+    if(options.key){
     let data = {
       key: options.key,
       lat: app.globalData.lat,
@@ -50,6 +51,16 @@ Page({
         topics: res.topics
       })
     })
+  }else if(options.opt){
+    let data = JSON.parse(options.opt)
+    console.log(data)
+    API.sieve(data).then(res=>{
+      that.setData({
+        teams: res.teams,
+      })
+    })
+
+  }
 
   },
   onShow: function () {

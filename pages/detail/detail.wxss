@@ -1,22 +1,29 @@
 .page{
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+  align-items: center;
   background-color: white;
 }
-.titleBar{
+/* .titleBar{
   width: 100%;
   background-color: white;
   position: fixed;
   z-index: 1;
-}
+} */
 .content{
   width: 92%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+._content{
+  display: flex;
+  flex-direction: column;
+  /* margin-left: 40rpx; */
 }
 .content_item{
   display: flex;
@@ -33,7 +40,7 @@
   font-size: 14px;
   margin-right: 14px;
 }
-.tag_add{
+/* .tag_add{
   border: solid 1px #AB4CFA;
   border-radius: 11px;
   background-color: white;
@@ -41,38 +48,39 @@
   padding: 0px 17px 0px 17px;
   font-size: 14px;
   margin-right: 14px;
-}
+} */
 .information_box{
   width: 100%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: start;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 50rpx;
+  margin-bottom: 40rpx;
 }
-.information{
-  width: 100%;
-  margin-bottom: 10px;
+.information text{
+  font-weight: bold;
 }
-.new{
+.join{
   font-size: 14px;
   color: white;
   background-color: #7CB8F8;
-  margin: 10px 0;
-  padding: 2px 24px 2px 24px;
+  /* margin: 10px 0; */
+  padding: 4px 24px;
   border-radius: 5px;
 }
 .icon_box1{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background-color: white;
+  padding-bottom: 10rpx;
+  /* border-bottom: 1px solid #EFEFEF; */
 }
 .content_box{
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-bottom: 10px;
-  border-bottom: solid 1px #EFEFEF;
+  border-top: solid 1px #EFEFEF;
   margin-top: 20px;
 }
 .content_info{
@@ -91,15 +99,34 @@
   display: flex;
   flex-direction: row;
 }
+.topic_info_box{
+  display: flex;
+  flex-direction: row;
+}
+.topic_user_info{
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  margin-left: 15rpx;
+  flex: 1;
+}
 .team_info{
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 .date_info{
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-end; */
+  font-size:11px;
+  color:#848484;
+}
+.location_info{
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  align-items: center;
+  margin-top:30rpx;
 }
 
 .comment{
@@ -137,10 +164,12 @@
 }
 
 .warn{
-  margin: 90rpx auto;
+  width: 100%;
+  padding-top: 70rpx;
   text-align: center;
   font-size: 28rpx;
   color: #a8a7a7;
+  border-top: 1px solid #EFEFEF;
 }
 
 .item-number{

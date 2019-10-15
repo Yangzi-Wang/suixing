@@ -1,4 +1,3 @@
-// pages/fens/fens.js
 const app = getApp()
 const API = require('../../API/api');
 var sliderWidth = 0; // 需要设置slider的宽度，用于计算中间位置
@@ -38,9 +37,9 @@ Page({
     })
 
 if(options.key==0){   //我的关注
-  API.getInterestList(app.globalData.userid).then(res => {
+  API.getFollowList(app.globalData.userid).then(res => {
     that.setData({
-      list: res.interest
+      list: res.follow
     })
   })
   wx.setNavigationBarTitle({

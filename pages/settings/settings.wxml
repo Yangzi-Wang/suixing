@@ -1,0 +1,34 @@
+<!--pages/settings/settings.wxml-->
+<view class="page">
+<view class="settings">
+    <view class="settings-item">
+        <view>头像</view>
+		<image class="btnImg" src="{{info.avatarUrl}}" bindtap="onChooseImage"/>
+    </view>
+    <view class="settings-item">
+        <view>昵称</view>
+        <input id="nickName" value="{{info.nickName}}" bindconfirm="getValue" bindblur="getValue"/>
+    </view>			
+    <view class="settings-item">
+        <view>个人简介</view>
+        <input id="intro" value="{{info.intro}}" placeholder="请输入个人简介" placeholder-style="color:#888" bindconfirm="getValue" bindblur="getValue"/>
+    </view>
+    <view class="settings-item">
+        <view>电话号码</view>
+        <input id="phone" value="{{info.phone}}" placeholder="请输入电话号码" placeholder-style="color:#888" bindconfirm="getValue" bindblur="getValue"/>
+	</view>
+	<view class="settings-item">
+		<view>微信号</view>
+		<input id="wechat" value="{{info.wechat}}" placeholder="请输入微信号" placeholder-style="color:#888" bindconfirm="getValue" bindblur="getValue"/>
+    </view>
+</view>
+<button class="confirm" bindtap="confirm">确认</button>
+
+<view class='cropper-body' wx:if="{{showCropper}}">
+  <cropper id='cropper' class="stage"></cropper>
+  <view class='bar'>
+    <view class='btn' bindtap='fnCancel'>取消</view>
+    <view class='btn' bindtap='fnSubmit'>确定</view>
+  </view>
+</view>
+</view>

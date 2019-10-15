@@ -1,6 +1,6 @@
 <view class="page">
   <view class='titleBar' style='height:{{titlebar_height}}px;background-color:white'>
-    <image src='../../images/like.png' style='margin-top: {{item_icon_position}}px;margin-left: 15px;height: 18px;width: 79px;'></image>
+    <image src='../../images/logo.png' style='margin-top: {{item_icon_position}}px;margin-left: 15px;height: 18px;width: 79px;'></image>
   </view>
   <view class="page__bd">
     <view class="weui-tab">
@@ -24,7 +24,7 @@
               <view class='content_box'>
                 <view class='content_item'>
                   <text>活动标题</text>
-                  <textarea class='textarea_style' bindconfirm='getTeamTitle' bindblur='getTeamTitle'></textarea>
+                  <input class='textarea_style' bindconfirm='getTeamTitle' bindblur='getTeamTitle' value="{{team_data.title}}"></input>
                 </view>
                 <view class='content_item'>
                   <text>标签</text>
@@ -38,7 +38,7 @@
                 </view>
                 <view class='content_item'>
                   <text>活动内容</text>
-                  <textarea class='textarea_style' style='height:100px' bindconfirm='getTeamContent' bindblur='getTeamContent'></textarea>
+                  <textarea class='textarea_style' style='height:100px' bindconfirm='getTeamContent' bindblur='getTeamContent' value="{{team_data.content}}"></textarea>
                 </view>
                 <view class='content_item' style='margin-left:27px;'>
                   <text>时间</text>
@@ -54,26 +54,26 @@
                 </view>
                 <view class='content_item'>
                   <text>人员要求</text>
-                  <textarea class='textarea_style' style='height:62px;' bindconfirm='getTeamRequire' bindblur='getTeamRequire'></textarea>
+                  <textarea class='textarea_style' style='height:62px;' bindconfirm='getTeamRequire' bindblur='getTeamRequire' value="{{team_data.require}}"></textarea>
                 </view>
                 <view class='content_item'>
                   <text>价格预算</text>
-                  <textarea class='textarea_style' style='width:20%' bindconfirm='getTeamPrice' bindblur='getTeamPrice'></textarea>
+                  <input class='textarea_style' style='width:20%' bindconfirm='getTeamPrice' bindblur='getTeamPrice' value="{{team_data.price}}"></input>
                 </view>
                 <view class='content_item'>
                   <text>组队人数</text>
-                  <textarea class='textarea_style' style='width:20%' bindconfirm='getTeamMemberNum' bindblur='getTeamMemberNum'></textarea>
+                  <input class='textarea_style' style='width:20%' bindconfirm='getTeamMemberNum' bindblur='getTeamMemberNum' value="{{team_data.memberNum}}"></input>
                 </view>
                 <view class='content_post'>
                   <text class='get_post' bindtap='getPost'>》点击生成海报</text>
                   <!-- <image src='{{act_img}}' mode='aspectFill' style='height:128px;width:100%;background-color:#EEEEEE;'></image> -->
                   <!-- <view class='chooseImage' bindtap='chooseImage'></view> -->
-                  <canvas style="width: 100%; height: 159px;" canvas-id="post" v-if='{{hasPost}}'></canvas>
+                  <canvas style="width: 100%; height: 159px;" canvas-id="post" hidden='{{!hasPost}}'></canvas>
                 </view>
                 <view class='content_item' style='justify-content: space-between;'>
                   <view class='location' bindtap='addLocation'>
-                    <image wx:if="{{!location}}" src='../../images/like.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
-                    <image wx:if="{{location}}" src='../../images/like2.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <image wx:if="{{!location}}" src='../../images/location.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <image wx:if="{{location}}" src='../../images/location.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
                     <text style='margin-left:6px;padding-bottom:7px;'>
                       {{locationName?locationName:"添加位置信息"}}
                     </text>
@@ -115,8 +115,8 @@
                 </view>
                 <view class='content_item'>
                   <view class='location' bindtap='addLocation'>
-                    <image wx:if="{{!location}}" src='../../images/like.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
-                    <image wx:if="{{location}}" src='../../images/like.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <image wx:if="{{!location}}" src='../../images/location.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
+                    <image wx:if="{{location}}" src='../../images/location.png' style='height:20px;width:15px;margin-bottom:8px;'></image>
                     <text style='margin-left:6px;padding-bottom:7px;'>
                       {{locationName?locationName:"添加位置信息"}}
                     </text>

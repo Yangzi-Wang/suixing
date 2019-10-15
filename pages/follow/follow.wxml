@@ -1,4 +1,3 @@
-<!-- pages/fens/fens.wxml -->
 <view>
   <!-- <view class='titleBar' style='height:{{titlebar_height}}px;background-color:white'>
     <image src='../../images/return.png' bindtap='return' style='margin-top: {{item_icon_position}}px;margin-left: 20rpx;height: 40rpx;width: 40rpx;'></image>

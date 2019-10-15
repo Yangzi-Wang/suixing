@@ -5,48 +5,49 @@
   </view> -->
   
   <view class='content'> <!--style='margin-top:{{content_position}}px'-->
-    <view class='content_item'>
+  <!--组队-->
+  <view class='_content' wx:if="{{type==0}}">
       <image src='{{team.postUrl}}' mode='aspectFill' style='height:173px;width:100%;'></image>
-    </view>
     
-    <view class='content_item' style='margin-bottom:30px;'>
+    <view class='content_item' style='margin-bottom:40rpx;margin-top:30rpx;'>
       <text class='tag' wx:for="{{team.labels}}" wx:key="index">{{item.name}}</text>
       <!-- <text class='tag_add'>  +  </text> -->
     </view>
 
-    <view class='infomation_box'>
+    <view class='information_box'>
       <view class='information'>
-        <text style='font-weight:bold;margin-right:15px;'>活动主题</text>
-        <text>{{team.title}}</text>
+        <text>活动主题</text>
+        {{team.title}}
       </view>
       <view class='information'>
-        <text style='font-weight:bold;margin-right:15px;'>活动内容</text>
-        <text>{{team.content}}</text>
+        <text>活动内容</text>
+        {{team.content}}
       </view>
       <view class='information'>
-        <text style='font-weight:bold;margin-right:15px;'>时间</text>
-        <text>{{team.date}} {{team.time}}</text>
+        <text>时间</text>
+        {{team.date}} {{team.time}}
       </view>
       <view class='information'>
-        <text style='font-weight:bold;margin-right:15px;'>地点</text>
-        <text>{{team.locationName}}</text>
+        <text>地点</text>
+        {{team.locationName}}
       </view>
       <view class='information'>
-        <text style='font-weight:bold;margin-right:15px;'>价格预算</text>
-        <text>{{team.price}}/人</text>
+        <text>价格预算</text>
+        {{team.price}}/人
       </view>
       <view class='information'>
-        <text style='font-weight:bold;margin-right:15px;'>组队人数</text>
-        <text>{{team.memberNum}}人</text>
+        <text>组队人数</text>
+        {{team.memberNum}}人
       </view>
       <view class='information'>
-        <text style='font-weight:bold;margin-right:15px;'>人员要求</text>
-        <text>{{team.require}}</text>
+        <text>人员要求</text>
+      {{team.require}}
       </view>
     </view>
 
-    <view class='content_item' style='justify-content:center;'>
-      <text class='new' bindtap='join'>加入</text>
+    <view style='text-align:center;margin-bottom:30rpx;' wx:if="{{!mine}}">
+      <text class='join' bindtap='join' wx:if="{{!hasJoin}}">加入</text>
+      <text class='join' wx:else>已加入</text>
     </view>
 
     <view class='icon_box1'>
@@ -57,28 +58,77 @@
         </view>
     </view>
     <view class='item-number'>
-        <image src='../../images/like.png' style='height:18px;width:23px' id='{{team._id}}' catchtap=""></image>
+        <image src='../../images/like.png' style='height:18px;width:23px' catchtap="commentFocus"></image>
         <view class='textnumber'>
             <text>{{team.commentCount==0?'':team.commentCount}}</text>
         </view>
     </view>
     <view class='item-number'>
-        <image src="{{team.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' id='{{team._id}}' bindtap='like2team'></image>
+        <image src="{{team.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' bindtap='like2team'></image>
         <view class='textnumber'>
             <text>{{team.goodCount==0?'':team.goodCount}}</text>
         </view>
     </view>
     <view class='item-number'>
-        <image src="{{team.collectBool?'../../images/favorite2.png':'../../images/favorite.png'}}" style='height:19px;width:19px'
-         id='{{team._id}}' bindtap='collect2team'></image>
+        <image src="{{team.collectBool?'../../images/favorite2.png':'../../images/favorite.png'}}" style='height:19px;width:19px' bindtap='collect2team'></image>
         <view class='textnumber'>
             <text>{{team.collectCount==0?'':team.collectCount}}</text>
         </view>
     </view>
     </view>
+    </view>
+    <!--话题-->
+    <view class="_content" wx:if="{{type==1}}">
+  <view class='content_info' style='margin-bottom:30rpx;'>
+    <view class='topic_info_box'>
+        <image src='{{ topic.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%'></image>
+        <view class='topic_user_info'>
+            <text style='font-weight:bold;'>{{topic.owner.nickName}}</text>
+            <text>{{topic.owner.intro}}</text>
+        </view>
+        <view wx:if="{{topic.owner._id==userid}}" class="delete" catchtap="delete">删除</view>
+    </view>
+    <text style='font-size:13px;margin-top:12px;'>{{topic.content}}</text>
+    <view class='img_box2'>
+        <view wx:for="{{topic.images}}" wx:key="{{index}}">
+            <image src='{{item}}' mode='aspectFill' style='height:94px;width:94px;margin-right:5px;' bindtap='preImg' id="{{index}}"></image>
+        </view>
+    </view>
+    <view class='location_info'>
+        <image src='../../images/like.png' style='height:18px;width:14px' mode='scaleToFill'></image>
+        <text style='font-size:11px;color:#848484;margin-left:4px;'>
+            {{topic.locationName}} {{topic.distance>=1000?(topic.distance/1000+'km'):(topic.distance+'m')}}
+        </text>
+    </view>
+    <view class='date_info'>
+        {{topic.updatedAt}}
+    </view>
+</view>
+<view class='icon_box1'>
+    <view class='item-number'>
+        <image src='../../images/like.png' style='height:17px;width:17px'></image>
+        <view class='textnumber'>
+            <text></text>
+        </view>
+    </view>
+    <view class='item-number'>
+        <image src='../../images/like.png' style='height:18px;width:23px'></image>
+        <view class='textnumber'>
+            <text></text>
+        </view>
+    </view>
+    <view class='item-number'>
+        <image src="{{topic.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' bindtap='like'></image>
+        <view class='textnumber'>
+            <text>{{topic.goodCount==0?'':topic.goodCount}}</text>
+        </view>
+    </view>
+</view>
+  </view>
 
+<!--评论区-->
     <view class='content_box' wx:for="{{comments}}" wx:key="{{index}}">
-      <view class='content_info' id="{{item._id}}">
+      <view class='content_info'>
         <view class='info_box'>
           <view class='user_info'>
             <image src='{{item.owner.avatarUrl}}' style='height:36px;width:36px;border-radius:50%'></image>
@@ -86,7 +136,7 @@
           </view>
           
           <view class='date_info'>
-            <text style='font-size:11px;color:#848484;padding-top:4px;'>{{item.createTime}}</text>
+            <text style='font-size:11px;color:#848484;padding-top:4px;'>{{item.updatedAt}}</text>
           </view>
         </view>
         <text style='font-size:13px;margin-top:12px;'>{{item.content}}</text>
@@ -98,8 +148,10 @@
       </view>
     </view>
     <view wx:if='{{comments==""}}' class='warn'>暂无评论！</view>
-    <view style="height:78rpx;"></view>
+    
   </view>
+<view style="height:78rpx;background-color:#f8f8f8;"></view>
+  
    <view class='comment'>
   <input type="text" class="comment_text" maxlength='70' value='{{comment}}'
   placeholder="评论" bindinput="commentInput" focus="{{focus}}" />

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "team":"../../component/team/team",
+    "topic":"../../component/topic/topic"
+  }
+}
