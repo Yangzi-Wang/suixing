@@ -13,6 +13,7 @@ App({
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
 
+    //获取缓存
     wx.getStorage({
       key: 'docid',
       success (res) {

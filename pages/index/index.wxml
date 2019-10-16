@@ -164,6 +164,7 @@
               <text style="padding-left:20rpx;font-size:12px;">距离: {{maxDistance}}</text>
             </view>
             <!-- 附近组队 -->
+            <!-- 组件 见component目录 -->
             <team class='content_box' wx:for="{{teams}}" wx:key="index" team="{{item}}"></team>
             <view style='height:20px;background-color:white;'></view>
           </scroll-view>
