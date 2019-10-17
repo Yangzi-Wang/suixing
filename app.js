@@ -8,6 +8,8 @@ App({
     let that = this
 
 
+    wx.clearStorage()
+
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())

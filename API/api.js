@@ -199,4 +199,28 @@ module.exports ={
     return request('/sieve', 'post', data)    //筛选
   },
 
+  getChatList: (id) => {
+    return request('/team/chatList/'+id, 'get', '')    //获取讨论组列表，id为用户id，即app.globalData.userid
+  },
+
+  getChatContent: (id) => {
+    return request('/team/chat/'+id, 'get', '')    //获取群聊内容,id为某个组队的id
+  },
+
+  sendChatContent: (data) => {
+    return request('/team/chat', 'post', data)    //群聊中发送信息，data的字段为userid，content，teamid
+  },
+
+  userSearch: (no) => {
+    return request('/noToUserid/'+no, 'get', '')    //通过账号搜索用户
+  },
+
+  updateTeamMember: (data) => {
+    return request('/teamMember', 'put', data)    //更新组队的成员，data的字段为teamid，hasJoin（如果删除了某个成员，再加一个字段deletedUserid）
+  },
+
+  teamOver: (data) => {
+    return request('/team/over', 'put', data)    //结束组队，data的字段为teamid
+  },
+
 }
