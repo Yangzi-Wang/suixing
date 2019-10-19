@@ -4,16 +4,16 @@
     <scroll-view scroll-y class='choose_box' style='margin-top:{{titlebar_height}}px;height:({{current_windowHeight}}-{{titlebar_height}})px' wx:if="{{activeIndex == 0}}">
       <text class='text_title'>活动时间</text>
       <view class='content_item'>
-          <picker mode="date" value="{{date}}" start="2019-09-01" end="2020-09-01" bindchange="bindDateChange">
-            <view class="picker_style">
-              <!-- <text decode="true">&nbsp;&nbsp;</text> -->
-              {{date}}
-            </view>
-          </picker>
+        <picker mode="date" value="{{date}}" start="2019-09-01" end="2020-09-01" bindchange="bindDateChange">
+          <view class="picker_style">
+            <!-- <text decode="true">&nbsp;&nbsp;</text> -->
+            {{date}}
+          </view>
+        </picker>
       </view>
       <text class='text_title'>选择城市</text>
       <view class='content_item'>
-          <region-picker bind:regionPickerEvent="onGetRegion"></region-picker>
+        <region-picker bind:regionPickerEvent="onGetRegion"></region-picker>
       </view>
       <!-- <text class='text_title'>其他城市</text>
       <view class='content_item' style='margin-left:27px;'>
@@ -101,15 +101,11 @@
     <!-- 筛选话题 -->
     <scroll-view scroll-y class='choose_box' style='margin-top:{{titlebar_height}}px;height:({{current_windowHeight}}-{{titlebar_height}})px' wx:if="{{activeIndex == 1}}">
       <text class='text_title'>活动地点</text>
-      <view class='content_item'>
-        
-      </view>
-     
+      <view class='content_item'></view>
       <!-- <text class='text_title'>活动距离</text>
       <view class='content_item' style='margin-left:27px;'>
         
       </view> -->
-      
       <text class='text_title'>活动类型</text>
       <view class='content_item'>
         <text class='tag' wx:for="{{tags}}" wx:key="*this">{{item}}</text>
@@ -130,21 +126,29 @@
   </view>
   <!-- 定位以及筛选 -->
   <view class="header" style='margin-top: {{header_position}}px;'>
-    <view class='header_icon'>
-      <image src='../../images/location.png' style='width:17px;height:23px;margin-left:27px;' mode="widthFix"></image>
-      <text style='position:absolute;margin-top:22px;margin-left:-22px;'>{{city}}</text>
+    <view class='header_location'>
+      <image src='../../images/location.png' style='width:25rpx;height:35rpx;' mode="widthFix"></image>
+      <text>{{city}}</text>
     </view>
     <view class='search'>
-      <input type="text" class="weui-search-bar__input" placeholder="搜索" bindconfirm="search" style='height:100%;width:100%;background-color:#EEEEEE;border-radius: 5px' />
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" bindconfirm="search" style='height:100%;width:100%;background-color:#EEEEEE;padding-left:5px;border-radius: 5px;' />
     </view>
-    <view class='header_icon' bindtap='showChooseModal'>
+    <!-- 取消筛选功能 -->
+    <!-- <view class='header_icon' bindtap='showChooseModal'>
       <image src='../../images/like.png' style='width:21px;height:21px;margin-right:27px;'></image>
       <text style='position:absolute;margin-top:22px;margin-left:-50px;'>筛选</text>
+    </view> -->
+  </view>
+  <!-- 选择距离 -->
+  <view class="distance-slider" style='margin-top: {{header_position+60}}px;'>
+    <view style="width:75%;">
+      <slider active-color="#AB4CFA" min="0" max="3" step="0.5" value="3" block-size="20" show-value="{{false}}" bindchange="distanceChange" />
     </view>
+    <text style="padding-left:20rpx;font-size:12px;">距离: {{maxDistance}}</text>
   </view>
   <view class="page__bd">
     <view class="weui-tab">
-      <view class="weui-navbar" style='margin-top:{{navbar_position}}px;border-bottom: solid 1px #EFEFEF'>
+      <view class="weui-navbar" style='margin-top:{{navbar_position+40}}px;border-bottom: solid 1px #EFEFEF'>
         <block wx:for="{{tabs}}" wx:key="*this">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" data-current="{{index}}" bindtap="tabClick">
             <view class="weui-navbar__title">{{item}}</view>
@@ -155,14 +159,7 @@
       <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}">
         <swiper-item>
           <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
-            <view style='height:{{content_position}}px;background-color:white;'></view>
-            <!-- 选择距离 -->
-            <view class="distance-slider">
-              <view style="width:75%;">
-                <slider active-color="#AB4CFA" min="0" max="3" step="0.5" value="3" block-size="20" show-value="{{false}}" bindchange="distanceChange"/>
-              </view>
-              <text style="padding-left:20rpx;font-size:12px;">距离: {{maxDistance}}</text>
-            </view>
+            <view style='height:{{content_position+40}}px;background-color:white;'></view>
             <!-- 附近组队 -->
             <!-- 组件 见component目录 -->
             <team class='content_box' wx:for="{{teams}}" wx:key="index" team="{{item}}"></team>
@@ -171,7 +168,7 @@
         </swiper-item>
         <swiper-item>
           <scroll-view style='height:100%' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
-            <view style='height:{{content_position}}px;background-color:white;'></view>
+            <view style='height:{{content_position+40}}px;background-color:white;'></view>
             <!-- 热门话题 -->
             <topic class='content_box' wx:for="{{hotTopics}}" wx:key="{{item._id}}" topic="{{item}}"></topic>
             <view style='height:20px;background-color:white;'></view>

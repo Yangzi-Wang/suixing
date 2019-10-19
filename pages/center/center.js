@@ -17,10 +17,10 @@ Page({
     current_windowWidth: 0,
 
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    item_icon_position: 0,
-    titleBarHeight: 32,
-    titlebar_height: 0,
-    header_position: 0,
+    // item_icon_position: 0,
+    // titleBarHeight: 32,
+    // titlebar_height: 0,
+    // header_position: 0,
     navbar_position: 0,
     navbar_position2: 0,
     content_position: 0,
@@ -98,7 +98,7 @@ Page({
     //加载收藏列表
     if(e.currentTarget.id==2){
       let data = {
-        id: app.globalData.userid,
+        id: this.data.userInfo._id,
         lat: app.globalData.lat,
         lng: app.globalData.lng
       }
@@ -167,7 +167,7 @@ Page({
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2 - 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
-          item_icon_position: res.statusBarHeight + 13,
+          // item_icon_position: res.statusBarHeight + 13,
           // titlebar_height: res.statusBarHeight + 34,
           // header_position: res.statusBarHeight + 33,
           navbar_position: 151,//res.statusBarHeight + 185,

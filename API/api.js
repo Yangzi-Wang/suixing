@@ -66,12 +66,12 @@ module.exports ={
     return request('/teams', 'post', data)    //组队列表
   },
 
-  getTopicDetail:(id) =>{
-    return request('/topic/'+id,'get','')    //话题
+  getTopicDetail:(id,data) =>{
+    return request('/topic/'+id,'get',data)    //话题详情
   },
 
-  getTeamDetail: (id) => {
-    return request('/team/'+id, 'get', '')    //组队
+  getTeamDetail: (id,data) => {
+    return request('/team/'+id, 'get', data)    //组队详情
   },
 
   getLabels: () => {
@@ -136,9 +136,6 @@ module.exports ={
     return request('/followCancel', 'post', data)         //取消关注
   },
 
-  getCommentsMsg: (data) => {
-    return request('/messages/comment/' + data, 'get', '')         //获取给我的评论
-  },
 
   //点赞
   addGood: (data) => {

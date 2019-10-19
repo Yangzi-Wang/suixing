@@ -97,7 +97,7 @@ Page({
       lat: lat,
       lng: lng,
       getNear: true,
-      maxDistance: maxDistance || 3
+      maxDistance: maxDistance || 3000
     }
 
     API.getTeams(data).then(res => {
@@ -129,6 +129,7 @@ Page({
       })
     }
     this.loadTeams(e.detail.value)
+    this.loadHotTopics(e.detail.value)
 
   },
 

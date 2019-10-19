@@ -4,6 +4,7 @@
   flex-direction: column;
   width: 92.5%;
   margin-left: 14px;
+  margin-top: 10px;
 }
 .info_box{
   display: flex;

@@ -12,7 +12,7 @@
         <view class='location_info'>
             <image src='../../images/location.png' style='height:18px;width:14px'></image>
             <text style='font-size:11px;color:#848484;margin-left:4px;'>
-                {{item.locationName}} {{item.distance}}m
+                {{item.locationName}} {{item.distance>=1000?(item.distance/1000+'km'):(item.distance+'m')}}
             </text>
         </view>
         <view class='date_info'>{{item.updatedAt}}</view>

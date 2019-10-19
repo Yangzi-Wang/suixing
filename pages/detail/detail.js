@@ -4,17 +4,17 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    item_icon_position: 0,
-    titlebar_height: 0,
-    content_position: 0,
-    type: null,
+    // item_icon_position: 0,
+    // titlebar_height: 0,
+    // content_position: 0,
+    type: null,     //0组队，1话题
     team: '',
     topic: '',
-    hasJoin: false,
-    mine: false,
+    hasJoin: false,       //是否已加入组队
+    mine: false,           //是否是本人发布
     comments: [],
-    comment: '',
-    focus: false
+    comment: '',      //input表单里的评论内容
+    focus: false      //input表单是否聚焦
   },
 
   return() {
@@ -29,12 +29,14 @@ Page({
     })
   },
 
+  // 获取input表单里的内容
   commentInput(e) {
     this.setData({
       comment: e.detail.value
     })
   },
 
+  // 发送评论
   addComment() {
     let that = this
     let _id = this.data.type == 0 ? this.data.team._id : this.data.topic._id
@@ -46,9 +48,11 @@ Page({
     API.comment(data).then(res => {
       if (res.success) {
         util.showSuccess("发送成功")
+        // 发送成功后，重新获取评论列表
         API.getCommentsOnly(_id).then(res => {
           let comments = res
           comments.forEach(item => {
+            // 格式化时间
             item.updatedAt = util.formatTime(new Date(item.updatedAt))
           })
           that.setData({
@@ -65,6 +69,7 @@ Page({
       })
     })
   },
+  // 点赞话题
   like: function () {
     let that = this
     this.setData({
@@ -82,6 +87,7 @@ Page({
       })
     }
   },
+  // 点赞组队
   like2team: function () {
     let that = this
     this.setData({
@@ -100,6 +106,7 @@ Page({
     }
 
   },
+  // 收藏组队
   collect2team: function () {
     let that = this
     this.setData({
@@ -118,6 +125,7 @@ Page({
     }
 
   },
+  // 加入组队
   join() {
     let data = {
       owner: this.data.team.owner._id,
@@ -135,34 +143,45 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        //console.log(res);
-        that.setData({
-          item_icon_position: res.statusBarHeight + 13,
-          titlebar_height: res.statusBarHeight + 50,
-          content_position: res.statusBarHeight + 60,
-        })
-        //console.log(that.item_icon_position);
-      },
-    })
+    let that = this;
+    let data = {
+      lat:app.globalData.lat,
+      lng:app.globalData.lng
+    }
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     //console.log(res);
+    //     that.setData({
+    //       item_icon_position: res.statusBarHeight + 13,
+    //       titlebar_height: res.statusBarHeight + 50,
+    //       content_position: res.statusBarHeight + 60,
+    //     })
+    //     //console.log(that.item_icon_position);
+    //   },
+    // })
 
-    options.type == 0 && API.getTeamDetail(options.id).then(res => {
+    // type=0,组队
+    options.type == 0 && API.getTeamDetail(options.id,data).then(res => {
       let hasJoin = false
       let mine = false
+      // 从组队成员数组中判断是否有本用户id，有则已加入
       if (res.team.hasJoin && res.team.hasJoin.indexOf(app.globalData.userid) != -1) hasJoin = true
+      // 判断是否为本用户发布的组队
       if (app.globalData.userid == res.team.owner._id) mine = true
 
       let team = res.team
       team.updatedAt = util.formatTime(new Date(team.updatedAt))
+      // 点赞个数
       team.goodCount = team.good.length
+      // 收藏个数
       team.collectCount = team.collect.length
+      // 本用户是否点赞
       if (team.good && team.good.indexOf(app.globalData.userid) != -1) {
         team.likeBool = true
       } else {
         team.likeBool = false
       }
+      // 本用户是否收藏
       if (team.collect && team.collect.indexOf(app.globalData.userid) != -1) {
         team.collectBool = true
       } else {
@@ -184,7 +203,8 @@ Page({
       })
     })
 
-    options.type == 1 && API.getTopicDetail(options.id).then(res => {
+    // type=1，话题
+    options.type == 1 && API.getTopicDetail(options.id,data).then(res => {
       let mine = false
       if (app.globalData.userid == res.topic.owner._id) mine = true
 
