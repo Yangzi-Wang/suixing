@@ -216,7 +216,7 @@ Page({
           content_position: res.statusBarHeight + 165,
           current_windowWidth: res.windowWidth
         })
-        //console.log(that.item_icon_position);
+        //console.log(that.data.item_icon_position);
       },
     })
 
@@ -377,6 +377,7 @@ Page({
   },
   bindLabelChange(e) {
     let newArr = this.data.labels
+    
     newArr.push(this.data.labelsArr[e.detail.value])
     this.setData({
       labels: newArr

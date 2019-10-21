@@ -19,7 +19,7 @@
     <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}">
       <swiper-item>
         <!-- 讨论组 -->
-        <!-- <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+         <!--<scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
           <view style='height:{{content_position}}px;background-color:white;'></view>
           
           <view class='content_box' wx:for="{{content}}" wx:key="this">
@@ -44,6 +44,11 @@
             </view>
           </view>
         </scroll-view> -->
+        <view>
+        <image src='../../images/post.png' mode='scaleToFill' style='width:160px;'></image>
+        <image src='dosth.avatarUrl'></image>
+        <text>{{dosth.nickName}}</text>
+        </view>
       </swiper-item>
       <swiper-item>
         <!-- <scroll-view style='height:100%' scroll-y bindscroll="onPageScroll" class="weui-tab__content"> -->

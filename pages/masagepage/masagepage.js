@@ -28,6 +28,10 @@ Page({
     commentMsg: [],
     msg:[],
     isLogin: false,
+    dosth:{
+      nickName:'上线',
+      avatarUrl:''
+    },
   },
 
   agree(e){
@@ -39,7 +43,7 @@ Page({
     var that = this;
      wx.getSystemInfo({
       success: function (res) {
-        //console.log(res);
+        console.log(res);
         that.setData({
            sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2 - 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
@@ -52,6 +56,11 @@ Page({
         })
       },
     })
+    let data = {
+      id: app.globalData.userid,
+      lat: app.globalData.lat,
+      lng: app.globalData.lng
+    }
 
     API.getCommentsMsg(app.globalData.userid).then(res=>{
       that.setData({
@@ -63,6 +72,14 @@ Page({
         msg:res
       })
     })
+    API.getUser(data).then(res=>{
+      that.setData({
+        dosth:res
+      })
+      console.log(res)
+    })
+    console.log(app.globalData.userid)
+    console.log(app.globalData.userInfo)
   },
   getId: function (e) {
     //console.log(e)

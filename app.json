@@ -17,7 +17,7 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "white",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "Oteam",
     "navigationBarTextStyle": "black",
     "navigationStyle": "default"
