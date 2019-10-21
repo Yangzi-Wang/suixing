@@ -1,10 +1,33 @@
 <!-- pages/search/search.wxml -->
-<view>
-    <!-- <view class='titleBar' style='height:{{titlebar_height}}px;'>
-        <image src='../../images/return.png' bindtap="return" style='margin-top: {{item_icon_position}}px;margin-left: 20rpx;height: 40rpx;width: 40rpx;'></image>
-        <text style="margin-left:50rpx">搜索结果</text>
-    </view> -->
-    <!-- <view style='height:{{titlebar_height}}px;'></view> -->
-    <team class='content_box' wx:for="{{teams}}" wx:key="index" team="{{item}}"></team>
-    <topic class='content_box' wx:for="{{topics}}" wx:key="{{item._id}}" topic="{{item}}"></topic>
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar" style='margin-top:{{navbar_position+40}}px;border-bottom: solid 1px #EFEFEF'>
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" data-current="{{index}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}">
+        <swiper-item>
+          <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+            <view style='height:{{content_position}}px;background-color:white;'></view>
+            <!-- 组队 -->
+            <team class='content_box' wx:for="{{teams}}" wx:key="index" team="{{item}}"></team>
+            <view wx:if="{{teams==''}}" class="warn">查找不到您想要的结果</view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view style='height:100%' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+            <view style='height:{{content_position}}px;background-color:white;'></view>
+            <!-- 话题 -->
+            <topic class='content_box' wx:for="{{topics}}" wx:key="{{item._id}}" topic="{{item}}"></topic>
+            <view wx:if="{{topics==''}}" class="warn">查找不到您想要的结果</view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
 </view>

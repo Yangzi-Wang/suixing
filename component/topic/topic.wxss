@@ -9,6 +9,7 @@
 .info_box{
   display: flex;
   flex-direction: row;
+  font-size: 13px;
 }
 .user_info{
   display: flex;

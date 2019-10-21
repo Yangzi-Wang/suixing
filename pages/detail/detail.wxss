@@ -167,7 +167,7 @@
   width: 100%;
   padding-top: 70rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 13px;
   color: #a8a7a7;
   border-top: 1px solid #EFEFEF;
 }

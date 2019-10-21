@@ -95,6 +95,10 @@ module.exports ={
     return request('/team/'+id, 'delete', '')         //删除组队
   },
 
+  deleteForward: (id) => {
+    return request('/forward/'+id, 'delete', '')         //删除转发
+  },
+
   login:(data)=>{
     return request('/openid','post',data)         //交换openid
   },
@@ -136,6 +140,10 @@ module.exports ={
     return request('/followCancel', 'post', data)         //取消关注
   },
 
+  
+  forward: (data) => {
+    return request('/forward', 'post', data)       //转发
+  },
 
   //点赞
   addGood: (data) => {

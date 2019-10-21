@@ -19,7 +19,8 @@ Component({
   data: {
     showme:true,
     item:{},
-    userid:''
+    userid:'',
+    hiddenmodal:true
   },
 
   observers: {
@@ -39,22 +40,27 @@ Component({
       })
       if (this.data.item.likeBool) {
         API.addGood({
-          topicid: that.properties.topic._id,
+          topicid: that.data.item._id,
           userid: app.globalData.userid
         })
       } else {
         API.removeGood({
-          topicid: that.properties.topic._id,
+          topicid: that.data.item._id,
           userid: app.globalData.userid
         })
       }
     },
     getDetail(){
       wx.navigateTo({
-        url: '../detail/detail?id=' + this.properties.topic._id +'&&type=1'
+        url: '../detail/detail?id=' + this.data.item._id +'&&type=1'
       })
     },
     navToCenter(){
+      wx.navigateTo({
+        url: '../center/center?userid=' + this.data.item.owner._id
+      })
+    },
+    navToCenter2(){
       wx.navigateTo({
         url: '../center/center?userid=' + this.properties.topic.owner._id
       })
@@ -67,7 +73,14 @@ Component({
         content: '确定要删除吗？',
         success (res) {
           if (res.confirm) {
-            API.deleteTopic(that.properties.topic._id).then(res=>{
+            that.properties.topic.from&&API.deleteForward(that.properties.topic._id).then(res=>{
+              if(res.success){
+                that.setData({
+                  showme:false
+                })
+              }
+            })
+            !that.properties.topic.from&&API.deleteTopic(that.properties.topic._id).then(res=>{
               if(res.success){
                 that.setData({
                   showme:false
@@ -80,7 +93,7 @@ Component({
 
     },
     init(){
-      let topic = this.properties.topic
+      let topic = this.properties.topic.from?this.properties.topic.from:this.properties.topic
       topic.updatedAt=util.formatTime(new Date(topic.updatedAt))
       topic.goodCount = topic.good.length
       if (topic.good && topic.good.indexOf(app.globalData.userid) != -1) {
@@ -92,6 +105,11 @@ Component({
       this.setData({
         userid: app.globalData.userid,
         item:topic
+      })
+    },
+    showModal(){
+      this.setData({
+        hiddenmodal:false
       })
     }
   },
