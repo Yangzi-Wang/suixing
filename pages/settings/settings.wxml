@@ -1,6 +1,10 @@
 <!--pages/settings/settings.wxml-->
 <view class="page">
 <view class="settings">
+  <view class="settings-item">
+        <view>账号</view>
+        <view>{{info.no}}</view>
+    </view>
     <view class="settings-item">
         <view>头像</view>
 		<image class="btnImg" src="{{info.avatarUrl}}" bindtap="onChooseImage"/>

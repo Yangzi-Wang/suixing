@@ -99,11 +99,11 @@
   display: flex;
   flex-direction: row;
 }
-.topic_info_box{
+._info_box{
   display: flex;
   flex-direction: row;
 }
-.topic_user_info{
+._user_info{
   display: flex;
   flex-direction: column;
   font-size: 13px;
@@ -181,4 +181,15 @@
   position: absolute;
   left: 12px;
   top: -10px;
+}
+.hasJoin{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.hasJoin image{
+  margin-right: 15rpx;
+  height:30px;
+  width:30px;
+  border-radius:50%;
 }

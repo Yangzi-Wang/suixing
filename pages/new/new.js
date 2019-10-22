@@ -35,6 +35,7 @@ Page({
     tempImage:'',
     team_data:{title:'',content:'',require:'',prince:'',memberNum:''},
     labels: [],
+    topic_labels: [],
     labelsArr:[],
     time: '',
     date: '',
@@ -86,6 +87,7 @@ Page({
       let data = {
         images: imagesURL,
         content: this.data.content_text,
+        labels: this.data.topic_labels,
         location:this.data.location,
         locationName: this.data.locationName,
         owner:app.globalData.userid
@@ -93,7 +95,7 @@ Page({
       API.postTopic(data).then(res=>{
         if(res.success){
           util.showSuccess("发布成功")
-          wx.reLaunch({
+          wx.switchTab({
             url: '../index/index'
           })
         }
@@ -457,6 +459,13 @@ Page({
     newArr.push(this.data.labelsArr[e.detail.value])
     this.setData({
       labels:newArr
+    })
+  },
+  bindLabelChange2(e){
+    let newArr = this.data.topic_labels
+    newArr.push(this.data.labelsArr[e.detail.value])
+    this.setData({
+      topic_labels:newArr
     })
   }
 })

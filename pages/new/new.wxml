@@ -30,10 +30,9 @@
                   <text>标签</text>
                   <view class="labels">
                     <view class='tag' wx:for="{{labels}}" wx:key="{{item._id}}">{{item.name}}</view>
-                    
-                      <picker bindchange="bindLabelChange" value="{{index}}" range="{{labelsArr}}" range-key='name'>
-                        <view class='tag_add'>+</view>
-                      </picker>
+                    <picker bindchange="bindLabelChange" value="{{index}}" range="{{labelsArr}}" range-key='name'>
+                      <view class='tag_add'>+</view>
+                    </picker>
                   </view>
                 </view>
                 <view class='content_item'>
@@ -97,7 +96,7 @@
             <view class='content'>
               <view class='content_box'>
                 <view class='content_item' style='height:36%;'>
-                  <textarea bindinput='onTextInput' placeholder="在这里写下你的想法..." focus="{{focus}}" style='padding-top:20px;'></textarea>
+                  <textarea bindinput='onTextInput' placeholder="记录您的发现..." focus="{{focus}}" style='padding-top:20px;'></textarea>
                   <!-- <text bindtap='changeToTextarea'
                           style='display:{{textView}};color:{{textColor}}'>
                           {{content_text}}
@@ -107,11 +106,22 @@
                         <text class='tag' wx:for="{{tags}}" wx:key="*this">{{item}}</text>
                         <text class='tag_add'>  +  </text>
                       </view> -->
+                <view class='content_item'>
+                  <text>标签：</text>
+                  <view class="labels" style="padding:0 5px 0 30px;">
+                    <view class='tag' wx:for="{{topic_labels}}" wx:key="{{item._id}}">
+                      {{item.name}}
+                    </view>
+                    <picker bindchange="bindLabelChange2" value="{{index}}" range="{{labelsArr}}" range-key='name'>
+                      <view class='tag_add'>+</view>
+                    </picker>
+                  </view>
+                </view>
                 <view class='content_item' style='width:100%;flex-wrap: wrap;'>
                   <block wx:for="{{preImg}}" wx:key="this">
                     <image src="{{item}}" style='height:94px;width:94px;background-color:#EEEEEE;margin-right:5px;margin-bottom:5px;'></image>
                   </block>
-                  <image style='height:94px;width:94px;background-color:#EEEEEE;' bindtap='onAddImage'></image>
+                  <view class="addImg" bindtap='onAddImage'>+</view>
                 </view>
                 <view class='content_item'>
                   <view class='location' bindtap='addLocation'>

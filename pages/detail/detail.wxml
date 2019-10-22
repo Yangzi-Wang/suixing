@@ -3,145 +3,166 @@
     <image src='../../images/return.png' bindtap="return"
       style='margin-top: {{item_icon_position}}px;margin-left: 20rpx;height: 40rpx;width: 40rpx;'></image>
   </view> -->
-  
-  <view class='content'> <!--style='margin-top:{{content_position}}px'-->
-
-  <!--组队-->
-  <view class='_content' wx:if="{{type==0}}">
-  <!-- 海报 -->
-      <image src='{{team.postUrl}}' mode='aspectFill' style='height:173px;width:100%;'></image>
-    <!-- 标签 -->
-    <view class='content_item' style='margin-bottom:40rpx;margin-top:30rpx;'>
-      <text class='tag' wx:for="{{team.labels}}" wx:key="index">{{item.name}}</text>
-      <!-- <text class='tag_add'>  +  </text> -->
-    </view>
-<!-- 组队信息 -->
-    <view class='information_box'>
-      <view class='information'>
-        <text>活动主题</text>
-        {{team.title}}
+  <view class='content'>
+    <!-- style='margin-top:{{content_position}}px' -->
+    <!-- 组队 -->
+    <view class='_content' wx:if="{{type==0}}">
+      <!-- 用户信息 -->
+      <view class='_info_box'>
+        <image src='{{ team.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%'></image>
+        <view class='_user_info'>
+          <text style='font-weight:bold;'>{{team.owner.nickName}}</text>
+          <text>{{team.owner.intro}}</text>
+        </view>
+        <!-- <view wx:if="{{mine}}" class="delete" catchtap="delete">删除</view> -->
       </view>
-      <view class='information'>
-        <text>活动内容</text>
-        {{team.content}}
+      <!-- 海报 -->
+      <image src='{{team.postUrl}}' mode='aspectFill' style='height:173px;width:100%;margin-top:30rpx;'></image>
+      <!-- 标签 -->
+      <view class='content_item' style='margin-bottom:40rpx;margin-top:30rpx;'>
+        <text class='tag' wx:for="{{team.labels}}" wx:key="index">{{item.name}}</text>
       </view>
-      <view class='information'>
-        <text>时间</text>
-        {{team.date}} {{team.time}}
+      <!-- 组队信息 -->
+      <view class='information_box'>
+        <view class='information'>
+          <text>活动主题</text>
+          {{team.title}}
+        </view>
+        <view class='information'>
+          <text>活动内容</text>
+          {{team.content}}
+        </view>
+        <view class='information'>
+          <text>时间</text>
+          {{team.date}} {{team.time}}
+        </view>
+        <view class='information'>
+          <text>地点</text>
+          {{team.locationName}}
+        </view>
+        <view class='information'>
+          <text>价格预算</text>
+          {{team.price}}/人
+        </view>
+        <view class='information'>
+          <text>组队人数</text>
+          {{team.hasJoinNum}}/{{team.memberNum}}
+        </view>
+        <view class='information'>
+          <text>人员要求</text>
+          {{team.require}}
+        </view>
+        <view class='information'>
+          <text>状态</text>
+          {{team.status?'已结束':'进行中'}}
+        </view>
+        <view class='information'>
+          <text>已加入用户</text>
+          <view class="hasJoin">
+            <image src="{{team.owner.avatarUrl}}" />
+            <image wx:for="{{team.hasJoin}}" src="{{item.avatarUrl}}" wx:key="{{item._id}}" />
+          </view>
+        </view>
       </view>
-      <view class='information'>
-        <text>地点</text>
-        {{team.locationName}}
+      <!-- 加入按钮 -->
+      <view style='text-align:center;margin-bottom:30rpx;' wx:if="{{!mine}}">
+        <text class='join' bindtap='join' wx:if="{{!hasJoin}}">加入</text>
+        <text class='join' wx:else>已加入</text>
       </view>
-      <view class='information'>
-        <text>价格预算</text>
-        {{team.price}}/人
+      <!-- 结束按钮 -->
+      <view style='text-align:center;margin-bottom:30rpx;' wx:if="{{mine&&!team.status}}">
+        <text class='join' bindtap='end'>结束活动</text>
       </view>
-      <view class='information'>
-        <text>组队人数</text>
-        {{team.memberNum}}人
-      </view>
-      <view class='information'>
-        <text>人员要求</text>
-      {{team.require}}
-      </view>
-    </view>
-<!-- 加入按钮 -->
-    <view style='text-align:center;margin-bottom:30rpx;' wx:if="{{!mine}}">
-      <text class='join' bindtap='join' wx:if="{{!hasJoin}}">加入</text>
-      <text class='join' wx:else>已加入</text>
-    </view>
-<!-- 转发、评论、点赞、收藏 -->
-    <view class='icon_box1'>
-      <view class='item-number'>
-        <image src='../../images/like.png' style='height:17px;width:17px'></image>
-        <view class='textnumber'>
+      <!-- 转发、评论、点赞、收藏 -->
+      <view class='icon_box1'>
+        <view class='item-number'>
+          <image src='../../images/like.png' style='height:17px;width:17px'></image>
+          <view class='textnumber'>
             <text>{{team.transmitCount==0?'':team.transmitCount}}</text>
+          </view>
         </view>
-    </view>
-    <view class='item-number'>
-        <image src='../../images/like.png' style='height:18px;width:23px' catchtap="commentFocus"></image>
-        <view class='textnumber'>
+        <view class='item-number'>
+          <image src='../../images/like.png' style='height:18px;width:23px' catchtap="commentFocus"></image>
+          <view class='textnumber'>
             <text>{{team.commentCount==0?'':team.commentCount}}</text>
+          </view>
         </view>
-    </view>
-    <view class='item-number'>
-        <image src="{{team.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' bindtap='like2team'></image>
-        <view class='textnumber'>
+        <view class='item-number'>
+          <image src="{{team.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' bindtap='like2team'></image>
+          <view class='textnumber'>
             <text>{{team.goodCount==0?'':team.goodCount}}</text>
+          </view>
         </view>
-    </view>
-    <view class='item-number'>
-        <image src="{{team.collectBool?'../../images/favorite2.png':'../../images/favorite.png'}}" style='height:19px;width:19px' bindtap='collect2team'></image>
-        <view class='textnumber'>
+        <view class='item-number'>
+          <image src="{{team.collectBool?'../../images/favorite2.png':'../../images/favorite.png'}}" style='height:19px;width:19px' bindtap='collect2team'></image>
+          <view class='textnumber'>
             <text>{{team.collectCount==0?'':team.collectCount}}</text>
+          </view>
         </view>
+      </view>
     </view>
-    </view>
-    </view>
-    <!--话题-->
+    <!-- 话题 -->
     <view class="_content" wx:if="{{type==1}}">
-  <view class='content_info' style='margin-bottom:30rpx;'>
-  <!-- 用户信息 -->
-    <view class='topic_info_box'>
-        <image src='{{ topic.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%'></image>
-        <view class='topic_user_info'>
+      <view class='content_info' style='margin-bottom:30rpx;'>
+        <!-- 用户信息 -->
+        <view class='_info_box'>
+          <image src='{{ topic.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%'></image>
+          <view class='_user_info'>
             <text style='font-weight:bold;'>{{topic.owner.nickName}}</text>
             <text>{{topic.owner.intro}}</text>
+          </view>
+          <!-- <view wx:if="{{mine}}" class="delete" catchtap="delete">删除</view> -->
         </view>
-        <view wx:if="{{topic.owner._id==userid}}" class="delete" catchtap="delete">删除</view>
-    </view>
-    <!--话题内容 -->
-    <text style='font-size:13px;margin-top:12px;'>{{topic.content}}</text>
-    <!-- 图片 -->
-    <view class='img_box2'>
-        <view wx:for="{{topic.images}}" wx:key="{{index}}">
+        <!-- 话题内容 -->
+        <text style='font-size:13px;margin-top:12px;'>{{topic.content}}</text>
+        <!-- 图片 -->
+        <view class='img_box2'>
+          <view wx:for="{{topic.images}}" wx:key="{{index}}">
             <image src='{{item}}' mode='aspectFill' style='height:94px;width:94px;margin-right:5px;' bindtap='preImg' id="{{index}}"></image>
+          </view>
         </view>
-    </view>
-    <!-- 位置信息 -->
-    <view class='location_info'>
-        <image src='../../images/like.png' style='height:18px;width:14px' mode='scaleToFill'></image>
-        <text style='font-size:11px;color:#848484;margin-left:4px;'>
+        <!-- 位置信息 -->
+        <view class='location_info'>
+          <image src='../../images/like.png' style='height:18px;width:14px' mode='scaleToFill'></image>
+          <text style='font-size:11px;color:#848484;margin-left:4px;'>
             {{topic.locationName}} {{topic.distance>=1000?(topic.distance/1000+'km'):(topic.distance+'m')}}
-        </text>
-    </view>
-    <!-- 发布日期 -->
-    <view class='date_info'>
-        {{topic.updatedAt}}
-    </view>
-</view>
-<!-- 转发、评论、点赞 -->
-<view class='icon_box1'>
-    <view class='item-number'>
-        <image src='../../images/like.png' style='height:17px;width:17px'></image>
-        <view class='textnumber'>
-            <text></text>
+          </text>
         </view>
-    </view>
-    <view class='item-number'>
-        <image src='../../images/like.png' style='height:18px;width:23px'></image>
-        <view class='textnumber'>
+        <!-- 发布日期 -->
+        <view class='date_info'>{{topic.updatedAt}}</view>
+      </view>
+      <!-- 转发、评论、点赞 -->
+      <view class='icon_box1'>
+        <view class='item-number'>
+          <image src='../../images/like.png' style='height:17px;width:17px'></image>
+          <view class='textnumber'>
             <text></text>
+          </view>
         </view>
-    </view>
-    <view class='item-number'>
-        <image src="{{topic.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' bindtap='like'></image>
-        <view class='textnumber'>
+        <view class='item-number'>
+          <image src='../../images/like.png' style='height:18px;width:23px'></image>
+          <view class='textnumber'>
+            <text></text>
+          </view>
+        </view>
+        <view class='item-number'>
+          <image src="{{topic.likeBool?'../../images/like2.png':'../../images/like.png'}}" style='height:18px;width:20px' bindtap='like'></image>
+          <view class='textnumber'>
             <text>{{topic.goodCount==0?'':topic.goodCount}}</text>
+          </view>
         </view>
+      </view>
     </view>
-</view>
-  </view>
-
-<!--评论区-->
+    <!-- 评论区 -->
     <view class='content_box' wx:for="{{comments}}" wx:key="{{index}}">
       <view class='content_info'>
         <view class='info_box'>
-        <!-- 用户头像、昵称 -->
+          <!-- 用户头像、昵称 -->
           <view class='user_info'>
             <image src='{{item.owner.avatarUrl}}' style='height:36px;width:36px;border-radius:50%'></image>
-            <text style='font-size:13px;margin-left:10px;padding-top:4px;font-weight:bold;'>{{item.owner.nickName}}</text>
+            <text style='font-size:13px;margin-left:10px;padding-top:4px;font-weight:bold;'>
+              {{item.owner.nickName}}
+            </text>
           </view>
           <!-- 发表日期 -->
           <view class='date_info'>
@@ -150,7 +171,6 @@
         </view>
         <!-- 评论内容 -->
         <text style='font-size:13px;margin-top:12px;'>{{item.content}}</text>
-
         <!-- <view class='location_info'>
           <image src='../../images/like.png' style='height:18px;width:14px'></image>
           <text style='font-size:11px;color:#848484;margin-left:4px;'>{{item.location}}</text>
@@ -158,16 +178,12 @@
       </view>
     </view>
     <view wx:if='{{comments==""}}' class='warn'>暂无评论！</view>
-    
   </view>
   <!-- 空白占位 -->
-<view style="height:78rpx;background-color:#f8f8f8;"></view>
-
+  <view style="height:78rpx;background-color:#f8f8f8;"></view>
   <!-- 底部评论框 -->
-   <view class='comment'>
-  <input type="text" class="comment_text" maxlength='70' value='{{comment}}'
-  placeholder="评论" bindinput="commentInput" focus="{{focus}}" />
-  <button class='send' bindtap='addComment'>发送</button>
-</view>
-
+  <view class='comment'>
+    <input type="text" class="comment_text" maxlength='70' value='{{comment}}' placeholder="评论" bindinput="commentInput" focus="{{focus}}" />
+    <button class='send' bindtap='addComment'>发送</button>
+  </view>
 </view>

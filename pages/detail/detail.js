@@ -14,7 +14,7 @@ Page({
     mine: false,           //是否是本人发布
     comments: [],
     comment: '',      //input表单里的评论内容
-    focus: false      //input表单是否聚焦
+    focus: false,      //input表单是否聚焦
   },
 
   return() {
