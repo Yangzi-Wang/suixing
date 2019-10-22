@@ -1,6 +1,8 @@
 <!-- component/topic/topic.wxml -->
 <view class='content_info' bindtap="getDetail" wx:if="{{showme}}">
     <view class='info_box' wx:if="{{showOwner}}">
+        <image wx:if="{{topic.from}}" src='{{ topic.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%' catchtap="navToCenter2"></image>
+        <view wx:if="{{topic.from}}" style="margin-left:15rpx;margin-right:15rpx;">转自</view>
         <image src='{{ item.owner.avatarUrl }}' style='height:36px;width:36px;border-radius:50%' catchtap="navToCenter"></image>
         <view class='user_info'>
             <text style='font-weight:bold;'>{{item.owner.nickName}}</text>
@@ -20,15 +22,13 @@
             {{item.locationName}} {{item.distance>=1000?(item.distance/1000+'km'):(item.distance+'m')}}
         </text>
     </view>
-    <view class='date_info'>
-        {{item.updatedAt}}
-    </view>
+    <view class='date_info'>{{item.updatedAt}}</view>
 </view>
 <view class='icon_box1' wx:if="{{showme}}">
     <view class='item-number'>
-        <image src='../../images/forward.png' style='height:17px;width:17px'></image>
+        <image src='../../images/forward.png' style='height:17px;width:17px' bindtap="showModal"></image>
         <view class='textnumber'>
-            <text></text>
+            <text>{{item.forwardCount==0?'':item.forwardCount}}</text>
         </view>
     </view>
     <view class='item-number'>
@@ -44,3 +44,4 @@
         </view>
     </view>
 </view>
+<forward hiddenmodal="{{hiddenmodal}}" from="{{item._id}}"></forward>

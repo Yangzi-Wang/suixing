@@ -4,19 +4,18 @@ const app = getApp()
 const API = require('../../API/api')
 const util = require('../../utils/util.js')
 var sliderWidth = 0; // 需要设置slider的宽度，用于计算中间位置
-let lat = null, lng = null;
+let lat = null, lng = null;   //经纬度信息
 let sieve_city;
 
 Page({
   data: {
-    motto: 'Hello World',
     tabs: ["附近组队", "热门话题"],
     sliderOffset: 0,
     sliderLeft: 0,
     activeIndex: 1,
     current_windowWidth: 0,
     current_windowHeight: 0,
-    userInfo: {},
+    // userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     item_icon_position: 0,
@@ -26,14 +25,15 @@ Page({
     content_position: 0,
     content_position2: 0,
     titleBarHeight: 32,
-    teams: [],
+    
     show_modal: false,
     city: '定位中',
-    date: '',
-    labels: [],
-    labelsArr: [],
+    date: '',   //时间选择器
+    labels: [],  //标签
+    labelsArr: [],   //
+    teams: [],
     hotTopics: [],
-    myTopics: [],
+    // myTopics: [],
     isLogin: false,
     maxDistance: '3km'
     // currentContentId:0,
@@ -62,7 +62,7 @@ Page({
   },*/
 
 
-
+//获取话题列表
   loadHotTopics: function (maxDistance) {
     let data = {
       lat: lat,
@@ -91,12 +91,13 @@ Page({
     })
   },
 
+  //获取组队列表
   loadTeams: function (maxDistance) {
     let data = {
       lat: lat,
       lng: lng,
       getNear: true,
-      maxDistance: maxDistance || 3
+      maxDistance: maxDistance || 3000
     }
 
     API.getTeams(data).then(res => {
@@ -113,9 +114,11 @@ Page({
       this.setData({
         teams: res
       })
+      console.log(res)
     })
   },
 
+  //距离变化监听
   distanceChange(e) {
     if (e.detail.value == 0.5) {
       this.setData({
@@ -127,6 +130,7 @@ Page({
       })
     }
     this.loadTeams(e.detail.value)
+    this.loadHotTopics(e.detail.value)
 
   },
 
@@ -137,6 +141,7 @@ Page({
     })
   },
 
+  //转跳到搜索页
   search: function (e) {
     wx.navigateTo({
       url: '../search/search?key=' + e.detail.value
@@ -248,6 +253,7 @@ Page({
     }
 
 
+    //首页定位城市，获取经纬度信息
     wx.getSetting({
       success: (res) => {
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
@@ -347,6 +353,8 @@ Page({
       }
     })
   },
+
+  //如果取消授权获取地理位置，默认处理
   getDefaultLocation: function () {
     let that = this
 
@@ -368,6 +376,8 @@ Page({
     that.loadHotTopics()
     that.loadTeams()
   },
+
+  //获取全部标签
   getLabels() {
     API.getLabels().then(res => {
       this.setData({
@@ -375,6 +385,8 @@ Page({
       })
     })
   },
+
+  //筛选中监听标签选择
   bindLabelChange(e) {
     let newArr = this.data.labels
     
@@ -383,10 +395,13 @@ Page({
       labels: newArr
     })
   },
+
+  //筛选中监听选择的城市
   onGetRegion(e) {
     sieve_city = e.detail.city
   },
 
+  //筛选
   sieve() {
     this.animation.translateX(237).step(),
       this.setData({
@@ -409,6 +424,8 @@ Page({
     })
 
   },
+
+  //重置标签
   labelsClean() {
     this.setData({
       labels: []

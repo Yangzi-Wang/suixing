@@ -8,11 +8,14 @@ App({
     let that = this
 
 
+    wx.clearStorage()
+
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
 
+    //获取缓存
     wx.getStorage({
       key: 'docid',
       success (res) {

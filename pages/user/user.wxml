@@ -5,10 +5,12 @@
   <!-- 个人信息 -->
   <view class="header" style='margin-top: {{header_position}}px;'>
     <view class='avatar_box'>
-      <view class='button_style'>
-        <image src='' style='height:18px;width:18px;margin-left:16px;' mode='widthFix'></image>
-        <text style='font-size:10px;color:#4F4E4F;margin-left:6px;padding-top:4px;'>客服中心</text>
-      </view>
+      <!-- <view class='button_style'> -->
+        <navigator open-type="navigate" class='button_style' hover-class='none' url="../masagepage/masagepage">
+        <image src='../../images/masage.png' style='height:18px;width:18px;margin-left:16px;' mode='widthFix'></image>
+        <text style='font-size:10px;color:#4F4E4F;margin-left:6px;padding-top:4px;'>消息中心</text>
+        </navigator>
+      <!-- </view> -->
       <!-- 头像 -->
       <view class='avatar_style'>
         <button wx:if="{{!authorized}}" class='btn1' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
@@ -18,18 +20,18 @@
         <text style='font-size:12px;'>{{userInfo.nickName}}</text>
         <text style='font-size:10px;color:#6B6B6B'>{{userInfo.intro}}</text>
       </view>
-      <view class='masageclick'>
+      <!-- <view class='masageclick'> -->
         <view class='button_style'>
-          <!-- <image src='../../images/like.png' style='height:18px;width:19px;'></image> -->
+          <image src='../../images/masage.png' style='height:18px;width:19px;'></image>
           <text style='font-size:10px;color:#AB4CFA;margin-left:6px;padding-top:4px;'>关于我们</text>
         </view>
-        <navigator open-type="navigate" hover-class="clickcolor" url="../masagepage/masagepage">
+        <!-- <navigator open-type="navigate" hover-class="clickcolor" url="../masagepage/masagepage">
           <label>
             <image src='../../images/masage.png' style='height:50px;width:50px;padding-top:13px;'></image>
             <text class='masagenumber'>12</text>
           </label>
-        </navigator>
-      </view>
+        </navigator> -->
+      <!-- </view> -->
     </view>
     <view style='width:100%;display: flex;flex-direction: row;justify-content:center;'>
       <view class='fans'>

@@ -1,13 +1,40 @@
 /* pages/search/search.wxss */
-.titleBar{
-    width: 100%;
-    background-color: white;
-    position: fixed;
-    z-index: 1;
-  }
-  .content_box{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background: #fff;
-  }
+  page,
+.page,
+.page__bd{
+  height: 100%;
+}
+.page__bd{
+  padding-bottom: 0;
+}
+.weui-tab__content{
+  background-color: white
+}
+.weui-navbar__slider{
+  bottom:6px;
+  width:0.2em;
+  background-color:#AB4CFA;
+}
+.weui-navbar{
+  position: fixed;
+  background-color: white;
+}
+
+.weui-navbar__item.weui-bar__item_on{
+  color:#AB4CFA
+}
+
+.swiper_style{
+  height: 100%;
+}
+.content_box{
+  width: 100%;
+  /* padding-bottom: 10px; */
+}
+.warn{
+  width: 100%;
+  padding-top: 40%;
+  text-align: center;
+  font-size: 14px;
+  color: #a8a7a7;
+}

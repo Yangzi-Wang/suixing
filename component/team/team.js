@@ -88,6 +88,11 @@ Component({
     },
     navToCenter(){
       wx.navigateTo({
+        url: '../center/center?userid=' + this.data.item.owner._id
+      })
+    },
+    navToCenter2(){
+      wx.navigateTo({
         url: '../center/center?userid=' + this.properties.team.owner._id
       })
     },
@@ -99,7 +104,15 @@ Component({
         content: '确定要删除吗？',
         success (res) {
           if (res.confirm) {
-            API.deleteTeam(that.data.item._id).then(res=>{
+            
+            that.properties.team.from&&API.deleteForward(that.properties.team._id).then(res=>{
+              if(res.success){
+                that.setData({
+                  showme:false
+                })
+              }
+            })
+            !that.properties.team.from&&API.deleteTeam(that.properties.team._id).then(res=>{
               if(res.success){
                 that.setData({
                   showme:false
@@ -111,7 +124,7 @@ Component({
       })
     },
     init(){
-      let team = this.properties.team
+      let team = this.properties.team.from?this.properties.team.from:this.properties.team
       team.updatedAt=util.formatTime(new Date(team.updatedAt))
       team.goodCount = team.good.length
       team.collectCount = team.collect.length

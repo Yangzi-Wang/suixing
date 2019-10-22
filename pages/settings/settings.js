@@ -120,6 +120,7 @@ Page({
   onLoad: function (options) {
     let that = this
     API.getUserBasicInfo(app.globalData.userid).then(res => {
+      console.log(res)
       that.setData({
         info: res
       })

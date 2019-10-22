@@ -1,0 +1,7 @@
+<!--component/forward/forward.wxml-->
+<modal hidden="{{hiddenmodal}}" title="转发" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="forwardConfirm">
+<checkbox-group bindchange="checkboxChange">
+  <view><checkbox value="0" checked="{{checked0}}"/>同步到朋友圈</view>
+  <view><checkbox value="1" checked="{{checked1}}"/>分享给微信朋友</view>
+</checkbox-group>
+</modal>

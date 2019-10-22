@@ -7,8 +7,8 @@ var sliderWidth = 0; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
   data: {
-    inputVal: "",
-    inputShowed: false,
+    // inputVal: "",
+    // inputShowed: false,
     tabs: ["活动", "话题", "收藏"],
     tabs_second: ["发布过", "参与过"],
     tabs_topic: ["发布过", "浏览过"],
@@ -19,13 +19,14 @@ Page({
     sliderLeft2: 0,
     activeIndex2: 3,
     current_windowWidth: 0,
+    //用户信息
     userInfo: {
       nickName:"未登录",
       avatarUrl:'',
       intro:''
     },
     authorized: false,
-    collections:[],
+    collections:[],//收藏列表
 
 
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -42,11 +43,11 @@ Page({
     topNum3: 0,
     topNum4: 0,
     index_second: 3,
-    followNum: 0,
-    fansNum: 0,
+    // followNum: 0,
+    // fansNum: 0,
     currentContentId: 0,
     currentImgId: 0,
-    like: "",
+    // like: "",
   },
 
   // getId: function (e) {
@@ -96,7 +97,7 @@ Page({
       data.nickName = userInfo.nickName
       data.avatarUrl = userInfo.avatarUrl
       data.userid = app.globalData.userid
-      API.updateUserInfo(data)
+      API.updateUserInfo(data)                          //这里有个bug
         .catch(error => {
           util.showToast('网络错误')
         })
@@ -138,15 +139,15 @@ Page({
     })
   },
 
-  inputTyping: function (e) {
-    var that = this
-    //console.log(e.detail);
-    that.setData({
-      inputVal: e.detail.value
-    });
-    //console.log(this.data.inputVal);
+  // inputTyping: function (e) {
+  //   var that = this
+  //   //console.log(e.detail);
+  //   that.setData({
+  //     inputVal: e.detail.value
+  //   });
+  //   //console.log(this.data.inputVal);
 
-  },
+  // },
 
   onPageScroll: function (e) {
     //console.log(e)
@@ -223,7 +224,7 @@ Page({
   },
 
   
-
+ //转跳到修改基本信息页面
   getBasicInfo(){
     wx.navigateTo({
       url: '../settings/settings'
@@ -291,6 +292,7 @@ Page({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权
+          //获取用户信息
           let data = {
             id: app.globalData.userid,
             lat: app.globalData.lat,
@@ -308,12 +310,12 @@ Page({
     })
   },
 
-  getUserInfo: function (e) {
-    //console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      authorized: true
-    })
-  }
+  // getUserInfo: function (e) {
+  //   //console.log(e)
+  //   app.globalData.userInfo = e.detail.userInfo
+  //   this.setData({
+  //     userInfo: e.detail.userInfo,
+  //     authorized: true
+  //   })
+  // }
 })
