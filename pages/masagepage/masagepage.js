@@ -61,8 +61,8 @@ Page({
         msg:res
       })
     }),
-    console.log(that.data.chat)
 
+    
     API.getChatList(app.globalData.userid).then(res=>{
       that.setData({
         chat:res

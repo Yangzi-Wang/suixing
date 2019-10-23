@@ -77,3 +77,22 @@ page,
   justify-content:center;
 padding-right: 10px;
 }
+.cycava{
+  width: 30px;
+  height:30px;
+  border-radius: 50%;
+}
+
+.btn{
+  width: 88px;
+  height: 25px;
+  background-color: #000000;
+  color:#ffffff;
+  font-size: 15px;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 0px; 
+  position: relative;
+  bottom: 0px;
+}

@@ -49,10 +49,13 @@
         <view class='content_box' wx:for="{{chat}}" wx:key="{{index}}">
          <image src='../../images/post.png'style='height:120px;width:140px;'></image>
           <view>
+          <image class='cycava' src='{{item.owner.avatarUrl}}'></image>
+          <text style='font-size:12px;'>{{item.owner.nickName}}\n</text>
           <text style='color:#0000ff;font-size:15px;font-weight:bold;'>{{item.title}}\n</text>
           <text style='font-size:12px;'>人数：{{item.memberNum}}/</text>
           <text style='font-size:12px; color:#800080;'>{{item.hasJoinNum}}</text>
           </view>
+          <button class='btn'>进入群聊</button>
         </view>
 
       </swiper-item>
