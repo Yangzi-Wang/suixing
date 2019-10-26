@@ -15,7 +15,7 @@ Page({
     sliderLeft: 0,
     activeIndex: 0,
     // userInfo: {},
-    // current_windowWidth: 0,
+    current_windowWidth: 0,
     // current_windowHeight: 0,
     // item_icon_position: 0,
     // titlebar_height: 0,
@@ -25,12 +25,13 @@ Page({
     // content_position2: 0,
     // titleBarHeight: 32,
     // content: ["", "", ""],
+    btn_width:0,
     msg:[],
 
     isLogin: false,
     chat:[],
-    mas:[]
-
+    mas:[],
+    chatnum:[]
   },
 
   agree(e){
@@ -52,6 +53,8 @@ Page({
           //  navbar_position: res.statusBarHeight + 43,
           content_position: res.statusBarHeight+35 ,
           //  current_windowWidth: res.windowWidth
+          btn_width:res.windowWidth - 270,
+
         })
       },
     })
@@ -62,12 +65,14 @@ Page({
       })
     }),
 
-    
     API.getChatList(app.globalData.userid).then(res=>{
       that.setData({
         chat:res
       })
       console.log(res)
+      for(var i=0;i<res.length;i++){
+        that.data.mas[i]=res[i]._id;
+      }
     })
     
   },

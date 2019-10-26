@@ -45,17 +45,28 @@
             </view>
           </view>
         </scroll-view> -->
-        <view style='height:{{content_position}}px;background-color:white;'></view>
-        <view class='content_box' wx:for="{{chat}}" wx:key="{{index}}">
+      <view style='height:{{content_position}}px;background-color:white;'></view>
+
+        <view class='chat_box' wx:for="{{chat}}" wx:key="{{index}}">
          <image src='../../images/post.png'style='height:120px;width:140px;'></image>
-          <view>
-          <image class='cycava' src='{{item.owner.avatarUrl}}'></image>
-          <text style='font-size:12px;'>{{item.owner.nickName}}\n</text>
-          <text style='color:#0000ff;font-size:15px;font-weight:bold;'>{{item.title}}\n</text>
-          <text style='font-size:12px;'>人数：{{item.memberNum}}/</text>
-          <text style='font-size:12px; color:#800080;'>{{item.hasJoinNum}}</text>
+          <view class='chat_mid'>
+           <view style='display:flex; align-items:flex-start;'>
+           <image class='cycava' src='{{item.owner.avatarUrl}}'></image>
+            <view style="display:flex;flex-direction:column;">
+            <text style='font-size:12px;'>{{item.owner.nickName}}</text>
+            <text style='font-size:10px;'>{{item.owner.intro}}</text>
+            </view>
+           </view>
+            <view style="display:flex;flex-direction:column;">
+            <text style='color:#0000ff;font-size:15px;font-weight:bold;'>{{item.title}}</text>
+              <view>
+              <text style='font-size:12px;'>人数：{{item.memberNum}}/</text>
+              <text style='font-size:12px; color:#800080;'>{{item.hasJoinNum}}</text>
+              </view>
+            <text style='text-align:right;'>+11</text>
+            <button class='btn' style='left:{{btn_width}}px;'>进入群聊</button>
+            </view>         
           </view>
-          <button class='btn'>进入群聊</button>
         </view>
 
       </swiper-item>

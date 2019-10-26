@@ -81,6 +81,7 @@ padding-right: 10px;
   width: 30px;
   height:30px;
   border-radius: 50%;
+  margin-right: 5px;
 }
 
 .btn{
@@ -89,10 +90,16 @@ padding-right: 10px;
   background-color: #000000;
   color:#ffffff;
   font-size: 15px;
-  vertical-align: middle;
-  text-align: center;
   line-height: 25px;
   border-radius: 0px; 
-  position: relative;
-  bottom: 0px;
+}
+.chat_box{
+  display: flex;
+  flex-direction: row;
+  padding: 15rpx 30rpx;
+  border-bottom: 1px solid #EFEFEF;
+}
+
+.chat_mid{
+  padding-left: 15px;
 }
