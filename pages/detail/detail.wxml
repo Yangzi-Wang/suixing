@@ -62,6 +62,7 @@
           <view class="hasJoin">
             <image src="{{team.owner.avatarUrl}}" />
             <image wx:for="{{team.hasJoin}}" src="{{item.avatarUrl}}" wx:key="{{item._id}}" />
+            <view bindtap="memberManage">管理</view>
           </view>
         </view>
       </view>

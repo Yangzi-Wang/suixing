@@ -1,0 +1,38 @@
+<!-- pages/member/member.wxml -->
+<view>
+    <!-- 添加成员 -->
+    <view class="top">
+        <text class="add" bindtap="addMember">+添加成员</text>
+    </view>
+    <!-- 搜索 -->
+    <view class='search' wx:if="{{showSearchBar}}">
+      <input type="text" class="search-input" placeholder="请输入用户账号" bindconfirm="search" />
+      <view bindtap="cancel">取消</view>
+    </view>
+    <!-- 搜索结果 -->
+    <view wx:if="{{result}}" class="item result">
+        <view class='user_info'>
+            <image src='{{result.avatarUrl}}' style='height:85rpx;width:85rpx;border-radius:50%'></image>
+            <view class='user_name'>
+                <view style='font-size:12px;font-weight:bold;'>{{result.nickName}}</view>
+                <view style='font-size:9px;color:#6B6B6B'>{{result.intro}}</view>
+            </view>
+            <button bindtap="invite" size="mini" style="height:50rpx;font-size:12px;" wx:if="{{result._id!=userid}}">
+                添加
+            </button>
+        </view>
+    </view>
+    <!-- 成员列表 -->
+    <view wx:for="{{members}}" wx:key="index" class="item">
+        <view class='user_info'>
+            <image src='{{item.avatarUrl}}' style='height:85rpx;width:85rpx;border-radius:50%'></image>
+            <view class='user_name'>
+                <view style='font-size:12px;font-weight:bold;'>{{item.nickName}}</view>
+                <view style='font-size:9px;color:#6B6B6B'>{{item.intro}}</view>
+            </view>
+            <button bindtap="delete" size="mini" style="height:50rpx;font-size:12px;" id="{{item._id}}">
+                删除
+            </button>
+        </view>
+    </view>
+</view>

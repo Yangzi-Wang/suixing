@@ -32,7 +32,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     item_icon_position: 0,
     titleBarHeight: 32,
-    content: ["", "", "", ""],
     titlebar_height: 0,
     header_position: 0,
     navbar_position: 0,
@@ -45,8 +44,8 @@ Page({
     index_second: 3,
     // followNum: 0,
     // fansNum: 0,
-    currentContentId: 0,
-    currentImgId: 0,
+    // currentContentId: 0,
+    // currentImgId: 0,
     // like: "",
   },
 
@@ -124,20 +123,20 @@ Page({
     }
   },
 
-  getLocation: function (e) {
-    var that = this
-    console.log(e)
-    wx.getLocation({
-      type: 'wgs84',
-      success(res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
-        const speed = res.speed
-        const accuracy = res.accuracy
-        console.log(res)
-      }
-    })
-  },
+  // getLocation: function (e) {
+  //   var that = this
+  //   console.log(e)
+  //   wx.getLocation({
+  //     type: 'wgs84',
+  //     success(res) {
+  //       const latitude = res.latitude
+  //       const longitude = res.longitude
+  //       const speed = res.speed
+  //       const accuracy = res.accuracy
+  //       console.log(res)
+  //     }
+  //   })
+  // },
 
   // inputTyping: function (e) {
   //   var that = this
@@ -167,7 +166,6 @@ Page({
     //console.log(this.data.topNum3);
     //console.log(this.data.topNum4)
   },
-
   tabClick: function (e) {
     //console.log(e)//获取滚动条当前位置的值
 
@@ -191,37 +189,42 @@ Page({
       })
     }
   },
-
   tabClick2: function (e) {
-    //console.log(e)//获取滚动条当前位置的值
+  //console.log(e)//获取滚动条当前位置的值
+  this.setData({
+    sliderOffset2: e.currentTarget.offsetLeft,
+    activeIndex2: e.currentTarget.id,
+  });
+  if (e.currentTarget.id == 3) {
     this.setData({
-      sliderOffset2: e.currentTarget.offsetLeft,
-      activeIndex2: e.currentTarget.id,
+      topNum: this.data.topNum3
     });
-    if (e.currentTarget.id == 3) {
-      this.setData({
-        topNum: this.data.topNum3
-      });
-    };
-    if (e.currentTarget.id == 4) {
-      this.setData({
-        topNum: this.data.topNum4
-      });
-    };
-  },
+  };
+  if (e.currentTarget.id == 4) {
+    this.setData({
+      topNum: this.data.topNum4
+    });
+  };
+},
 
-  onSwiperchange: function (e) {
-    //console.log(e)//获取滚动条当前位置的值
-    this.setData({
-      activeIndex: e.detail.current,
-    });
-    this.setData({
-      sliderOffset: this.data.current_windowWidth / this.data.tabs.length * this.data.activeIndex,
-    });
-    //console.log(e)
-    //console.log(this.data.activeIndex)
-    //console.log(this.data.sliderOffset)
-  },
+onSwiperchange: function (e) {
+  //console.log(e)//获取滚动条当前位置的值
+  this.setData({
+    activeIndex: e.detail.current,
+  });
+  this.setData({
+    sliderOffset: this.data.current_windowWidth / this.data.tabs.length * this.data.activeIndex,
+  });
+  //console.log(e)
+  //console.log(this.data.activeIndex)
+  //console.log(this.data.sliderOffset)
+},
+
+  
+
+  
+
+  
 
   
  //转跳到修改基本信息页面

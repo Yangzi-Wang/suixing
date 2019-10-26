@@ -24,7 +24,7 @@ page,
   background-color: white;
   position: fixed;
   z-index: 1;
-}
+} 
 .header{
   height: 144px;
   width: 100%;
@@ -36,18 +36,14 @@ page,
   background-color: white;
   z-index: 1;
 }
-.search{
-  margin-top: 8px;
-  width: 60%;
-  height: 10px;
-}
+
 .weui-tab__content{
   background-color: white
 }
 .swiper_style{
   height: 100%;
 }
-.tips{
+/* .tips{
   width: 100%;
   height: 500px;
   display: flex;
@@ -55,7 +51,7 @@ page,
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-}
+} */
 .btn1{
   width: 116rpx;
   height: 116rpx;
@@ -160,6 +156,13 @@ page,
   flex-direction: row;
   justify-content: space-around;
   margin-top: 12px;
+}
+.warn{
+  width: 100%;
+  padding-top: 40%;
+  text-align: center;
+  font-size: 14px;
+  color: #a8a7a7;
 }
 /* .clickcolor{
   color:  #AB4CFA;

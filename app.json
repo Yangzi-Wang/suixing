@@ -8,7 +8,8 @@
     "pages/follow/follow",
     "pages/settings/settings",
     "pages/center/center",
-    "pages/masagepage/masagepage"
+    "pages/masagepage/masagepage",
+    "pages/member/member"
   ],
   "permission": {
     "scope.userLocation": {
