@@ -15,7 +15,7 @@ Page({
     sliderLeft: 0,
     activeIndex: 0,
     // userInfo: {},
-    // current_windowWidth: 0,
+    current_windowWidth: 0,
     // current_windowHeight: 0,
     // item_icon_position: 0,
     // titlebar_height: 0,
@@ -25,7 +25,13 @@ Page({
     // content_position2: 0,
     // titleBarHeight: 32,
     // content: ["", "", ""],
+    btn_width:0,
     msg:[],
+
+    isLogin: false,
+    chat:[],
+    mas:[],
+    chatnum:[]
   },
 
   agree(e){
@@ -52,7 +58,7 @@ Page({
     let that = this;
      wx.getSystemInfo({
       success: function (res) {
-        //console.log(res);
+        console.log(res);
         that.setData({
            sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2 - 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
@@ -62,13 +68,14 @@ Page({
           //  navbar_position: res.statusBarHeight + 43,
           content_position: res.statusBarHeight+35 ,
           //  current_windowWidth: res.windowWidth
+          btn_width:res.windowWidth - 270,
+
         })
       },
     })
-
   //  获取消息列表
     API.getMsg(app.globalData.userid).then(res=>{
-      console.log(res)
+      // console.log(res)
       let msg = res
       msg.forEach(item => {
         if(item.updatedAt)
@@ -77,7 +84,15 @@ Page({
       that.setData({
         msg: msg
       })
+    }),
+
+    API.getChatList(app.globalData.userid).then(res=>{
+      that.setData({
+        chat:res
+      })
+      console.log(res)
     })
+    
   },
   // getId: function (e) {
   //   //console.log(e)

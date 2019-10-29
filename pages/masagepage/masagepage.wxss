@@ -77,3 +77,37 @@ page,
   justify-content:center;
 padding-right: 10px;
 }
+.cycava{
+  width: 30px;
+  height:30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.btn{
+  width: 88px;
+  height: 25px;
+  background-color: #000000;
+  color:#ffffff;
+  font-size: 15px;
+  line-height: 25px;
+  border-radius: 0px; 
+}
+.chat_box{
+  display: flex;
+  flex-direction: row;
+  padding: 15rpx 30rpx;
+  border-bottom: 1px solid #EFEFEF;
+}
+
+.chat_mid{
+  padding-left: 15px;
+}
+.user{
+  display:flex;
+  align-items:flex-start;
+}
+.col{
+  display:flex;
+  flex-direction:column;
+}

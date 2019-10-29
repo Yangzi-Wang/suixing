@@ -20,7 +20,7 @@
     <swiper class='swiper_style' bindchange='onSwiperchange' current="{{activeIndex}}">
       <swiper-item>
         <!-- 讨论组 -->
-        <!-- <scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
+         <!--<scroll-view style='height:100%;' scroll-y bindscroll="onPageScroll" class="weui-tab__content">
           <view style='height:{{content_position}}px;background-color:white;'></view>
           
           <view class='content_box' wx:for="{{content}}" wx:key="this">
@@ -45,6 +45,29 @@
             </view>
           </view>
         </scroll-view> -->
+      <view style='height:{{content_position}}px;background-color:white;'></view>
+
+        <view class='chat_box' wx:for="{{chat}}" wx:key="{{index}}">
+         <image src='../../images/post.png'style='height:120px;width:140px;'></image>
+          <view class='chat_mid'>
+           <view class="user">
+           <image class='cycava' src='{{item.owner.avatarUrl}}'></image>
+            <view class="col">
+            <text style='font-size:12px;'>{{item.owner.nickName}}</text>
+            <text style='font-size:10px;'>{{item.owner.intro}}</text>
+            </view>
+           </view>
+            <view class="col">
+            <text style='color:#0000ff;font-size:15px;font-weight:bold;'>{{item.title}}</text>
+              <view>
+              <text style='font-size:12px;'>人数：{{item.memberNum}}/</text>
+              <text style='font-size:12px; color:#800080;'>{{item.hasJoinNum}}</text>
+              </view>
+            <button class='btn' style='left:{{btn_width}}px;'>进入群聊</button>
+            </view>         
+          </view>
+        </view>
+
       </swiper-item>
       <!-- 消息列表 -->
       <swiper-item>

@@ -208,6 +208,7 @@ Page({
         hasJoin: hasJoin,
         mine: mine
       })
+      //console.log(res)
     })
 
     // type=1，话题

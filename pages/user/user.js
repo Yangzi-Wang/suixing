@@ -306,7 +306,7 @@ onSwiperchange: function (e) {
               authorized:true,
               userInfo:res
             })
-            // console.log(res)
+            //console.log(res)
           })
         }
       }
