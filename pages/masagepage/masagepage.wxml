@@ -76,7 +76,7 @@
                 <!-- 评论消息 -->
                 <block wx:else>
                 <image src='{{item.owner.avatarUrl}}' style='height:30px;width:30px;border-radius:50%'></image>
-                <view class='content_mid'>
+                <view class='content_mid' bindtap="navToTeamDetail" id="{{item.to}}">
                   <view style='font-size:10px;font-weight:bold;'>
                     {{item.owner.nickName}}<text style="font-size:12px;font-weight:normal;"> 评论了你</text>
                   </view>

@@ -2,19 +2,19 @@
   <view class='modal_style' wx:if="{{show_modal}}" bindtap='closeChooseModal'></view>
   <view class='animation_box' style='left:{{current_windowWidth}}px' animation="{{animation}}">
     <scroll-view scroll-y class='choose_box' style='margin-top:{{titlebar_height}}px;height:({{current_windowHeight}}-{{titlebar_height}})px' wx:if="{{activeIndex == 0}}">
-      <text class='text_title'>活动时间</text>
+      <!-- <text class='text_title'>活动时间</text>
       <view class='content_item'>
         <picker mode="date" value="{{date}}" start="2019-09-01" end="2020-09-01" bindchange="bindDateChange">
           <view class="picker_style">
-            <!-- <text decode="true">&nbsp;&nbsp;</text> -->
+            
             {{date}}
           </view>
         </picker>
-      </view>
-      <text class='text_title'>选择城市</text>
+      </view> --><!-- <text decode="true">&nbsp;&nbsp;</text> -->
+      <!-- <text class='text_title'>选择城市</text>
       <view class='content_item'>
         <region-picker bind:regionPickerEvent="onGetRegion"></region-picker>
-      </view>
+      </view> -->
       <!-- <text class='text_title'>其他城市</text>
       <view class='content_item' style='margin-left:27px;'>
       <region-picker></region-picker> -->

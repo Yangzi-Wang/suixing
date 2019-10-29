@@ -11,6 +11,7 @@
         <view wx:if="{{item.owner._id==userid}}" catchtap="delete" class="delete">删除</view>
     </view>
         <image src='{{item.postUrl}}' mode='center' style='height:159px;width:100%;margin-top:10rpx;'></image>
+        <view class="status {{item.status?'active':''}}">{{item.status?'进行中':'已结束'}}</view>
         <view class='location_info'>
             <image src='../../images/location.png' style='height:18px;width:14px'></image>
             <text style='font-size:11px;color:#848484;margin-left:4px;'>

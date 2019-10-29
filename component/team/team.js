@@ -83,7 +83,7 @@ Component({
 
     getDetail(){
       wx.navigateTo({
-        url: '../detail/detail?id=' + this.data.item._id + '&&type=0'
+        url: '../detail/detail?id=' + this.data.item._id + '&type=0'
       })
     },
     navToCenter(){

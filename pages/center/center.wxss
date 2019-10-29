@@ -182,3 +182,10 @@ top: -17px;
 font-size: 20px;
 color: #AB4CFA;
 }
+.warn{
+  width: 100%;
+  padding-top: 40%;
+  text-align: center;
+  font-size: 14px;
+  color: #a8a7a7;
+}

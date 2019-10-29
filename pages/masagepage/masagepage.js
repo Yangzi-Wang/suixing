@@ -29,8 +29,23 @@ Page({
   },
 
   agree(e){
-    API.agree(e.currentTarget.id).then(res=>{
-      if(res.success) util.showSuccess("已同意")
+    let that = this
+    API.agree(e.currentTarget.id).then(res => {
+      if (res.success) {
+        util.showSuccess("已同意")
+        //  获取消息列表
+        API.getMsg(app.globalData.userid).then(res => {
+          // console.log(res)
+          let msg = res
+          msg.forEach(item => {
+            if (item.updatedAt)
+              item.updatedAt = util.formatTime(new Date(item.updatedAt))
+          })
+          that.setData({
+            msg: msg
+          })
+        })
+      }
     })
   },
   onLoad: function (options) {
@@ -53,7 +68,7 @@ Page({
 
   //  获取消息列表
     API.getMsg(app.globalData.userid).then(res=>{
-      // console.log(res)
+      console.log(res)
       let msg = res
       msg.forEach(item => {
         if(item.updatedAt)
@@ -100,6 +115,11 @@ Page({
     //console.log(e)
     //console.log(this.data.activeIndex)
     //console.log(this.data.sliderOffset)
+  },
+  navToTeamDetail(e){
+    wx.navigateTo({
+      url: '../detail/detail?type=0&id='+e.currentTarget.id
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

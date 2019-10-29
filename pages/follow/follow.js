@@ -1,13 +1,8 @@
 const app = getApp()
 const API = require('../../API/api');
-// var sliderWidth = 0; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
   data: {
-    // titleBarHeight: 32,
-    // titlebar_height: 0,
-    // item_icon_position: 0,
-    // header_position: 0,
     list: [],
   },
 
@@ -15,22 +10,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this;
-    // wx.getSystemInfo({
-    //   success: function (res) {
-    //     //console.log(res);
-    //     that.setData({
-    //      // sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2 - 2,
-    //      // sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
-    //       item_icon_position: res.statusBarHeight + 13,
-    //       titlebar_height: res.statusBarHeight + 50,
-    //       header_position: res.statusBarHeight + 33,
-    //      // navbar_position: res.statusBarHeight + 43,
-    //      // content_position: res.statusBarHeight + 100,
-    //      // current_windowWidth: res.windowWidth
-    //     })
-    //   },
-    // })
+    let that = this
 
 if(options.key==0){   //我的关注
   API.getFollowList(app.globalData.userid).then(res => {
@@ -54,10 +34,9 @@ if(options.key==0){   //我的关注
     
 
   },
-
-  return:function(){
-    wx.navigateBack({
-      delta: 1
+  navToCenter(e){
+    wx.navigateTo({
+      url:'../center/center?userid='+e.currentTarget.id
     })
-  }
+  },
 })

@@ -41,17 +41,17 @@ Component({
     attached: function () {
       // 在组件实例进入页面节点树时执行
       let that = this
-      API.getRegion().then(res => {
+      // API.getRegion().then(res => {
 
-        let provinceNameArr = res.provinces.map(item => {
-          return item.provinceName
-        })
-        that.setData({
-          provinces: res.provinces,
-          'multiArray[0]': provinceNameArr,
-          'multiArray[1]': res.provinces[15].citys
-        })
-      })
+      //   let provinceNameArr = res.provinces.map(item => {
+      //     return item.provinceName
+      //   })
+      //   that.setData({
+      //     provinces: res.provinces,
+      //     'multiArray[0]': provinceNameArr,
+      //     'multiArray[1]': res.provinces[15].citys
+      //   })
+      // })
     }
   },
 })

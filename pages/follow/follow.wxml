@@ -4,7 +4,7 @@
   </view> -->
   <!-- <view style="height:{{titlebar_height}}px;"></view> -->
   <view wx:for="{{list}}" wx:key="index" class="item">
-        <view class='user_info'>
+        <view class='user_info' id="{{item._id}}" bindtap="navToCenter">
           <image src='{{item.avatarUrl}}' style='height:85rpx;width:85rpx;border-radius:50%'></image>
           <view class='user_name'>
             <view style='font-size:12px;font-weight:bold;'>

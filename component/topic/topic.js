@@ -52,7 +52,7 @@ Component({
     },
     getDetail(){
       wx.navigateTo({
-        url: '../detail/detail?id=' + this.data.item._id +'&&type=1'
+        url: '../detail/detail?id=' + this.data.item._id +'&type=1'
       })
     },
     navToCenter(){
