@@ -213,7 +213,7 @@ module.exports ={
   },
 
   sendChatContent: (data) => {
-    return request('/team/chat', 'post', data)    //群聊中发送信息，data的字段为userid，content，teamid
+    return request('/teamSpeak', 'post', data)    //群聊中发送信息，data的字段为userid，content，teamid
   },
 
   userSearch: (no) => {
@@ -221,7 +221,15 @@ module.exports ={
   },
 
   updateTeamMember: (data) => {
-    return request('/teamMember', 'put', data)    //更新组队的成员，data的字段为teamid，hasJoin（如果删除了某个成员，再加一个字段deletedUserid）
+    return request('/teamMember', 'put', data)    //更新组队的成员，data的字段为teamid，userid
+  },
+
+  deleteTeamMember: (data) => {
+    return request('/teamMember', 'delete', data)    //data的字段为teamid，userid
+  },
+
+  getTeamMember: (id) => {
+    return request('/teamMember/'+id, 'get', '')    //获取组队的成员
   },
 
   teamOver: (data) => {

@@ -14,7 +14,7 @@ Page({
     mine: false,           //是否是本人发布
     comments: [],
     comment: '',      //input表单里的评论内容
-    focus: false      //input表单是否聚焦
+    focus: false,      //input表单是否聚焦
   },
 
   return() {
@@ -138,6 +138,12 @@ Page({
     })
   },
 
+  memberManage(){
+    wx.navigateTo({
+      url:'../member/member?teamid='+this.data.team._id
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -162,10 +168,12 @@ Page({
 
     // type=0,组队
     options.type == 0 && API.getTeamDetail(options.id,data).then(res => {
+      // console.log(res)
       let hasJoin = false
       let mine = false
       // 从组队成员数组中判断是否有本用户id，有则已加入
-      if (res.team.hasJoin && res.team.hasJoin.indexOf(app.globalData.userid) != -1) hasJoin = true
+      let _idArr = res.team.hasJoin.map(item=>item._id)
+      if (res.team.hasJoin && _idArr.indexOf(app.globalData.userid) != -1) hasJoin = true
       // 判断是否为本用户发布的组队
       if (app.globalData.userid == res.team.owner._id) mine = true
 
@@ -192,7 +200,6 @@ Page({
       comments.forEach(item => {
         item.updatedAt = util.formatTime(new Date(item.updatedAt))
       })
-
 
       that.setData({
         type: 0,

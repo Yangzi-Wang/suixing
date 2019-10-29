@@ -60,8 +60,17 @@ Page({
     })
   //  获取消息列表
     API.getMsg(app.globalData.userid).then(res=>{
+<<<<<<< HEAD
+=======
+      // console.log(res)
+      let msg = res
+      msg.forEach(item => {
+        if(item.updatedAt)
+        item.updatedAt=util.formatTime(new Date(item.updatedAt))
+      })
+>>>>>>> b1d72cc396ae7877b42f5c56c8088ac0ab868340
       that.setData({
-        msg:res
+        msg: msg
       })
     }),
 

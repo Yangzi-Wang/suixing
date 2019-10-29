@@ -162,7 +162,8 @@
             <view style='height:{{content_position+40}}px;background-color:white;'></view>
             <!-- 附近组队 -->
             <!-- 组件 见component目录 -->
-            <team class='content_box' wx:for="{{teams}}" wx:key="index" team="{{item}}"></team>
+            <team class='content_box' wx:for="{{teams}}" wx:key="{{item._id}}" team="{{item}}"></team>
+            <view wx:if="{{teams==''}}" class="warn">附加暂无活动</view>
             <view style='height:20px;background-color:white;'></view>
           </scroll-view>
         </swiper-item>
@@ -171,6 +172,7 @@
             <view style='height:{{content_position+40}}px;background-color:white;'></view>
             <!-- 热门话题 -->
             <topic class='content_box' wx:for="{{hotTopics}}" wx:key="{{item._id}}" topic="{{item}}"></topic>
+            <view wx:if="{{hotTopics==''}}" class="warn">附近暂无话题</view>
             <view style='height:20px;background-color:white;'></view>
           </scroll-view>
         </swiper-item>

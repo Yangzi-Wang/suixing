@@ -77,18 +77,19 @@
           
           <view class='content_box' wx:for="{{msg}}" wx:key="{{index}}">
             <!-- 加入组队申请消息 -->
-            <block wx:if="{{item.status==0||item.status==1}}">
+            <block wx:if="{{item.status==0||item.status==1||item.status==2||item.status==4}}">
               <image src='{{item.status==0?item.participant.avatarUrl:item.owner.avatarUrl}}' style='height:30px;width:30px;border-radius:50%'></image>
                 <view class='content_mid'>
                   <view style='font-size:10px;font-weight:bold;'>
                     {{item.status==0?item.participant.nickName:item.owner.nickName}}
                   </view>
                   <view style='font-size:8px;color:#6B6B6B'>
-                    {{item.createTime}}
+                    {{item.updatedAt}}
                   </view>
-                  <view style='font-size:12px;font-weight:bold;'>
-                    {{item.status==0?'申请加入组队':'同意了你的申请'}}
-                  </view>
+                  <view style='font-size:12px;font-weight:bold;' wx:if="{{item.status==0}}">申请加入组队</view>
+                  <view style='font-size:12px;font-weight:bold;' wx:elif="{{item.status==1}}">同意了你的申请</view>
+                  <view style='font-size:12px;font-weight:bold;' wx:elif="{{item.status==2}}">把你移出了组队</view>
+                  <view style='font-size:12px;font-weight:bold;' wx:elif="{{item.status==4}}">邀请你加入组队</view>
                 </view>
               <!-- </view> -->
               <button wx:if="{{item.status==0}}" bindtap="agree" size="mini" style="height:50rpx;font-size:12px;" id="{{item._id}}">同意</button>
@@ -100,10 +101,10 @@
                 <image src='{{item.owner.avatarUrl}}' style='height:30px;width:30px;border-radius:50%'></image>
                 <view class='content_mid'>
                   <view style='font-size:10px;font-weight:bold;'>
-                    {{item.owner.nickName}}
+                    {{item.owner.nickName}}<text style="font-size:12px;font-weight:normal;"> 评论了你</text>
                   </view>
                   <view style='font-size:8px;color:#6B6B6B'>
-                    {{item.createTime}}
+                    {{item.updatedAt}}
                   </view>
                   <view style='font-size:12px;font-weight:bold;'>
                     {{item.content}}
