@@ -70,9 +70,6 @@ Page({
         chat:res
       })
       console.log(res)
-      for(var i=0;i<res.length;i++){
-        that.data.mas[i]=res[i]._id;
-      }
     })
     
   },

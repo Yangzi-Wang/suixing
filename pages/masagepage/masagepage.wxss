@@ -103,3 +103,11 @@ padding-right: 10px;
 .chat_mid{
   padding-left: 15px;
 }
+.user{
+  display:flex;
+  align-items:flex-start;
+}
+.col{
+  display:flex;
+  flex-direction:column;
+}
